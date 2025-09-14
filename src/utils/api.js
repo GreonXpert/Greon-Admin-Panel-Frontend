@@ -1,0 +1,1 @@
+export const API_BASE = 'https://greon-admin-panel-1.onrender.com';
