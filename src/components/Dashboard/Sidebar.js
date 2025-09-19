@@ -34,6 +34,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import Testimonial from '@mui/icons-material/Person4';
+import Project from '@mui/icons-material/PresentToAll'
 
 const Sidebar = ({ activePanel, setActivePanel, onItemClick, isMobileOpen, setIsMobileOpen }) => {
   const theme = useTheme();
@@ -96,6 +98,13 @@ const Sidebar = ({ activePanel, setActivePanel, onItemClick, isMobileOpen, setIs
       category: 'Management',
       color: '#FFB6C1'
     },
+    {
+      text: 'Testimonials Management', 
+      key: 'Testimonials', 
+      icon: <Testimonial />,
+      category: 'Management',
+      color: '#a314e0ff'
+    },
     { 
       text: 'Pending Submissions', 
       key: 'PendingReviews', 
@@ -124,6 +133,14 @@ const Sidebar = ({ activePanel, setActivePanel, onItemClick, isMobileOpen, setIs
       category: 'Content',
       color: '#87CEEB'
     },
+     { 
+      text: 'Our Projects', 
+      key: 'project', 
+      icon: <Project />,
+      category: 'Content',
+      color: '#4d8fe7ff'
+    },
+    
     { 
       text: 'Contact', 
       key: 'contact', 

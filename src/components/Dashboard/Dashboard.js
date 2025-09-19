@@ -32,6 +32,8 @@ import JourneyPanel from '../Journey/JourneyPanel';
 import TeamPanel from '../Team/TeamPanel';
 import SolutionPanel from '../Solutions/SolutionPanel';
 import ContactFormPanel from '../Contact/ContactFormPanel';
+import TestimonialPanel from '../Testimonials/TestimonialPanel';
+import ProjectPanel from '../Projects/ProjectPanel';
 
 const drawerWidth = 260;
 
@@ -81,6 +83,10 @@ const Dashboard = () => {
         return <SolutionPanel />;
       case 'contact':
         return <ContactFormPanel />;
+      case 'Testimonials':
+        return <TestimonialPanel />;  
+      case 'project':
+        return <ProjectPanel/>  
       case 'register':
         return (
           <ProtectedRoute requiredRole="superadmin">
@@ -122,6 +128,10 @@ const Dashboard = () => {
         return 'Our Solutions';
       case 'contact':
         return 'Contact Form Submissions';
+      case 'Testimonials':
+        return 'Testimonials Management';  
+      case 'project':
+        return 'Our Projects';  
       default:
         return 'Emissions Dashboard';
     }

@@ -4,6 +4,7 @@ import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
 import Dashboard from './components/Dashboard/Dashboard';
 import ExternalSubmission from './Pages/ExternalSubmission';
+import TestimonialSubmission from './Pages/TestimonialSubmission';
 
 /**
  * A component to protect routes that require authentication.
@@ -23,6 +24,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/submit/:token" element={<ExternalSubmission />} />
+        <Route path="/testimonials/submit/:code" element={<TestimonialSubmission />} />
         
         {/* Protected Dashboard Route */}
         <Route 
