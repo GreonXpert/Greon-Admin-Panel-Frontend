@@ -35,7 +35,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import Testimonial from '@mui/icons-material/Person4';
-import Project from '@mui/icons-material/PresentToAll'
+import Project from '@mui/icons-material/PresentToAll';
+import Career from '@mui/icons-material/Work'
 
 const Sidebar = ({ activePanel, setActivePanel, onItemClick, isMobileOpen, setIsMobileOpen }) => {
   const theme = useTheme();
@@ -145,9 +146,17 @@ const Sidebar = ({ activePanel, setActivePanel, onItemClick, isMobileOpen, setIs
       text: 'Contact', 
       key: 'contact', 
       icon: <Contact />,
-      category: 'Management',
+      category: 'Admin',
       color: '#F0A500'
     },
+      { 
+      text: 'Career', 
+      key: 'career', 
+      icon: <Career />,
+      category: 'Admin',
+      color: '#f02000ff'
+    },
+
   ];
 
   // Add Register option only for superadmin

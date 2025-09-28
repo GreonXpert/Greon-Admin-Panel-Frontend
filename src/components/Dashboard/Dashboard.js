@@ -34,6 +34,7 @@ import SolutionPanel from '../Solutions/SolutionPanel';
 import ContactFormPanel from '../Contact/ContactFormPanel';
 import TestimonialPanel from '../Testimonials/TestimonialPanel';
 import ProjectPanel from '../Projects/ProjectPanel';
+import CareerPanel from '../Career/CareerPanel';
 
 const drawerWidth = 260;
 
@@ -87,6 +88,8 @@ const Dashboard = () => {
         return <TestimonialPanel />;  
       case 'project':
         return <ProjectPanel/>  
+      case 'career':
+        return <CareerPanel/>  
       case 'register':
         return (
           <ProtectedRoute requiredRole="superadmin">
