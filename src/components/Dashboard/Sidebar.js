@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Typography,
@@ -15,7 +15,9 @@ import {
   Tooltip,
   useMediaQuery,
   useTheme,
-  IconButton
+  IconButton,
+  Collapse,
+  Badge
 } from '@mui/material';
 import BubbleChartIcon from '@mui/icons-material/BubbleChart';
 import VerifiedIcon from '@mui/icons-material/Verified';
@@ -36,11 +38,23 @@ import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import Testimonial from '@mui/icons-material/Person4';
 import Project from '@mui/icons-material/PresentToAll';
-import Career from '@mui/icons-material/Work'
+import Career from '@mui/icons-material/Work';
+import WebIcon from '@mui/icons-material/Web';
+import GroupsIcon from '@mui/icons-material/Groups';
+import LeaderboardIcon from '@mui/icons-material/Leaderboard';
+import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const Sidebar = ({ activePanel, setActivePanel, onItemClick, isMobileOpen, setIsMobileOpen }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
+  const [expandedSections, setExpandedSections] = useState({
+    website: true,
+    teams: true,
+    leads: true,
+    vlogs: true
+  });
   
   // Get user data from localStorage
   const user = JSON.parse(localStorage.getItem('user'));
@@ -48,149 +62,154 @@ const Sidebar = ({ activePanel, setActivePanel, onItemClick, isMobileOpen, setIs
   const userName = user?.name || 'Admin User';
   const userEmail = user?.email || 'admin@greonxpert.com';
 
-  // Base navigation items with better organization
-  const baseNavItems = [
-    { 
-      text: 'Emissions Panel', 
-      key: 'emissions', 
-      icon: <BubbleChartIcon />,
-      category: 'Analytics',
-      color: '#FF6B6B'
-    },
-    { 
-      text: 'Trusted By Panel', 
-      key: 'trustedBy', 
-      icon: <VerifiedIcon />,
-      category: 'Content',
-      color: '#4ECDC4'
-    },
-    { 
-      text: 'Powered By Science', 
-      key: 'PoweredByScience', 
-      icon: <EcoIcon />,
-      category: 'Content',
-      color: '#45B7D1'
-    },
-    { 
-      text: 'Climate Intelligence', 
-      key: 'climateIntelligence', 
-      icon: <AssessmentIcon />,
-      category: 'Analytics',
-      color: '#96CEB4'
-    },
-    { 
-      text: 'Advisory Board', 
-      key: 'AdvisoryBoard', 
-      icon: <InsightsIcon />,
-      category: 'Team',
-      color: '#FFEAA7'
-    },
-    { 
-      text: 'Sustainability Stories', 
-      key: 'story', 
-      icon: <NatureIcon />,
-      category: 'Content',
-      color: '#DDA0DD'
-    },
-    { 
-      text: 'Submission Links', 
-      key: 'submissionLink', 
-      icon: <TrendingUpIcon />,
-      category: 'Management',
-      color: '#FFB6C1'
-    },
-    {
-      text: 'Testimonials Management', 
-      key: 'Testimonials', 
-      icon: <Testimonial />,
-      category: 'Management',
-      color: '#a314e0ff'
-    },
-    { 
-      text: 'Pending Submissions', 
-      key: 'PendingReviews', 
-      icon: <LanguageIcon />,
-      category: 'Management',
-      color: '#FFA07A'
-    },
-    { 
-      text: 'Our Journey', 
-      key: 'journey', 
-      icon: <PublicIcon />,
-      category: 'Content',
-      color: '#1AC99F'
-    },
-    { 
-      text: 'Our Team', 
-      key: 'team', 
-      icon: <Team />,
-      category: 'Team',
-      color: '#20B2AA'
-    },
-    { 
-      text: 'Our Solutions', 
-      key: 'solutions', 
-      icon: <SolutionIcon />,
-      category: 'Content',
-      color: '#87CEEB'
-    },
-     { 
-      text: 'Our Projects', 
-      key: 'project', 
-      icon: <Project />,
-      category: 'Content',
-      color: '#4d8fe7ff'
-    },
-    
-    { 
-      text: 'Contact', 
-      key: 'contact', 
-      icon: <Contact />,
-      category: 'Admin',
-      color: '#F0A500'
-    },
-      { 
-      text: 'Career', 
-      key: 'career', 
-      icon: <Career />,
-      category: 'Admin',
-      color: '#f02000ff'
-    },
-
-  ];
-
-  // Add Register option only for superadmin
-  const navItems = userRole === 'superadmin'
-    ? [
-        ...baseNavItems,
+  // Organized navigation structure
+  const navigationSections = {
+    website: {
+      title: 'Website',
+      icon: <WebIcon />,
+      color: '#1AC99F',
+      items: [
         { 
+          text: 'Emissions Panel', 
+          key: 'emissions', 
+          icon: <BubbleChartIcon />,
+          color: '#FF6B6B'
+        },
+        { 
+          text: 'Climate Intelligence', 
+          key: 'climateIntelligence', 
+          icon: <AssessmentIcon />,
+          color: '#96CEB4'
+        },
+        { 
+          text: 'Trusted By Panel', 
+          key: 'trustedBy', 
+          icon: <VerifiedIcon />,
+          color: '#4ECDC4'
+        },
+        { 
+          text: 'Powered By Science', 
+          key: 'PoweredByScience', 
+          icon: <EcoIcon />,
+          color: '#45B7D1'
+        },
+        { 
+          text: 'Our Solutions', 
+          key: 'solutions', 
+          icon: <SolutionIcon />,
+          color: '#87CEEB'
+        },
+        { 
+          text: 'Our Projects', 
+          key: 'project', 
+          icon: <Project />,
+          color: '#4d8fe7ff'
+        },
+        { 
+          text: 'Our Journey', 
+          key: 'journey', 
+          icon: <PublicIcon />,
+          color: '#1AC99F'
+        }
+      ]
+    },
+    teams: {
+      title: 'Teams',
+      icon: <GroupsIcon />,
+      color: '#2E8B8B',
+      items: [
+        { 
+          text: 'Advisory Board', 
+          key: 'AdvisoryBoard', 
+          icon: <InsightsIcon />,
+          color: '#FFEAA7'
+        },
+        { 
+          text: 'Our Team', 
+          key: 'team', 
+          icon: <Team />,
+          color: '#20B2AA'
+        },
+        { 
+          text: 'Career Management', 
+          key: 'career', 
+          icon: <Career />,
+          color: '#f02000ff'
+        },
+        ...(userRole === 'superadmin' ? [{
           text: 'User Registration', 
           key: 'register', 
           icon: <PersonAddIcon />,
-          category: 'Admin',
           color: '#FF4757'
+        }] : [])
+      ]
+    },
+    leads: {
+      title: 'Leads & Testimonials',
+      icon: <LeaderboardIcon />,
+      color: '#FF9800',
+      items: [
+        {
+          text: 'Testimonials Management', 
+          key: 'Testimonials', 
+          icon: <Testimonial />,
+          color: '#a314e0ff'
+        },
+        { 
+          text: 'Contact Management', 
+          key: 'contact', 
+          icon: <Contact />,
+          color: '#F0A500'
         }
       ]
-    : baseNavItems;
-
-  // Group items by category
-  const groupedItems = navItems.reduce((acc, item) => {
-    if (!acc[item.category]) {
-      acc[item.category] = [];
+    },
+    vlogs: {
+      title: 'Content & Vlogs',
+      icon: <VideoLibraryIcon />,
+      color: '#E91E63',
+      items: [
+        { 
+          text: 'Sustainability Stories', 
+          key: 'story', 
+          icon: <NatureIcon />,
+          color: '#DDA0DD'
+        },
+        { 
+          text: 'Submission Links', 
+          key: 'submissionLink', 
+          icon: <TrendingUpIcon />,
+          color: '#FFB6C1'
+        },
+        { 
+          text: 'Pending Reviews', 
+          key: 'PendingReviews', 
+          icon: <LanguageIcon />,
+          color: '#FFA07A'
+        }
+      ]
     }
-    acc[item.category].push(item);
-    return acc;
-  }, {});
+  };
+
+  const handleSectionToggle = (sectionKey) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [sectionKey]: !prev[sectionKey]
+    }));
+  };
 
   const handleItemClick = (key) => {
     setActivePanel(key);
     if (onItemClick) {
-      onItemClick(); // Close mobile drawer
+      onItemClick();
     }
-    // Close mobile sidebar on item click
     if (isMobile && setIsMobileOpen) {
       setIsMobileOpen(false);
     }
+  };
+
+  // Count active items per section for badge
+  const getActiveCount = (sectionItems) => {
+    return sectionItems.filter(item => activePanel === item.key).length;
   };
 
   const sidebarContent = (
@@ -242,7 +261,7 @@ const Sidebar = ({ activePanel, setActivePanel, onItemClick, isMobileOpen, setIs
           borderBottom: '1px solid rgba(255,255,255,0.1)'
         }}>
           <Typography variant="h6" sx={{ color: 'white', fontWeight: 700 }}>
-            Menu
+            Admin Menu
           </Typography>
           <IconButton 
             onClick={() => setIsMobileOpen && setIsMobileOpen(false)}
@@ -255,7 +274,7 @@ const Sidebar = ({ activePanel, setActivePanel, onItemClick, isMobileOpen, setIs
 
       {/* Header Section */}
       <Box sx={{ 
-        p: 3, 
+        p: { xs: 2, md: 3 }, 
         textAlign: 'center',
         borderBottom: '1px solid rgba(255,255,255,0.1)',
         position: 'relative',
@@ -263,21 +282,21 @@ const Sidebar = ({ activePanel, setActivePanel, onItemClick, isMobileOpen, setIs
       }}>
         <Avatar
           sx={{
-            width: 64,
-            height: 64,
+            width: { xs: 48, md: 64 },
+            height: { xs: 48, md: 64 },
             mx: 'auto',
             mb: 2,
             background: 'linear-gradient(45deg, #1AC99F, #0E9A78)',
-            fontSize: '1.5rem',
+            fontSize: { xs: '1.2rem', md: '1.5rem' },
             fontWeight: 700,
             boxShadow: '0 4px 20px rgba(0,0,0,0.2)'
           }}
         >
-          <AdminPanelSettingsIcon sx={{ fontSize: 32 }} />
+          <AdminPanelSettingsIcon sx={{ fontSize: { xs: 24, md: 32 } }} />
         </Avatar>
         
         <Typography 
-          variant="h5" 
+          variant={isMobile ? "h6" : "h5"}
           sx={{ 
             color: 'white',
             fontWeight: 800,
@@ -293,7 +312,8 @@ const Sidebar = ({ activePanel, setActivePanel, onItemClick, isMobileOpen, setIs
           sx={{ 
             color: 'rgba(255,255,255,0.8)',
             mb: 2,
-            fontWeight: 500
+            fontWeight: 500,
+            fontSize: { xs: '0.75rem', md: '0.875rem' }
           }}
         >
           Admin Dashboard
@@ -303,14 +323,28 @@ const Sidebar = ({ activePanel, setActivePanel, onItemClick, isMobileOpen, setIs
         <Box sx={{ 
           background: 'rgba(255,255,255,0.1)',
           borderRadius: 3,
-          p: 2,
+          p: { xs: 1.5, md: 2 },
           backdropFilter: 'blur(10px)',
           border: '1px solid rgba(255,255,255,0.1)'
         }}>
-          <Typography variant="body2" sx={{ color: 'white', fontWeight: 600, mb: 0.5 }}>
+          <Typography 
+            variant="body2" 
+            sx={{ 
+              color: 'white', 
+              fontWeight: 600, 
+              mb: 0.5,
+              fontSize: { xs: '0.75rem', md: '0.875rem' }
+            }}
+          >
             {userName}
           </Typography>
-          <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.7)' }}>
+          <Typography 
+            variant="caption" 
+            sx={{ 
+              color: 'rgba(255,255,255,0.7)',
+              fontSize: { xs: '0.65rem', md: '0.75rem' }
+            }}
+          >
             {userEmail}
           </Typography>
           <Chip
@@ -321,20 +355,20 @@ const Sidebar = ({ activePanel, setActivePanel, onItemClick, isMobileOpen, setIs
               bgcolor: userRole === 'superadmin' ? '#FF6B6B' : '#4ECDC4',
               color: 'white',
               fontWeight: 600,
-              fontSize: '0.65rem'
+              fontSize: '0.65rem',
+              height: { xs: 20, md: 24 }
             }}
           />
         </Box>
       </Box>
 
-      {/* ✅ SCROLLABLE Navigation Section */}
+      {/* Navigation Section with Collapsible Groups */}
       <Box sx={{ 
         flex: 1,
         overflow: 'auto',
-        py: 2,
+        py: 1,
         position: 'relative',
         zIndex: 1,
-        // Custom scrollbar styling
         '&::-webkit-scrollbar': {
           width: 6,
         },
@@ -350,124 +384,155 @@ const Sidebar = ({ activePanel, setActivePanel, onItemClick, isMobileOpen, setIs
           }
         },
       }}>
-        {Object.entries(groupedItems).map(([category, items], categoryIndex) => (
-          <Box key={category} sx={{ mb: 3 }}>
-            {/* Category Header */}
-            <Typography 
-              variant="overline" 
-              sx={{ 
-                color: 'rgba(255,255,255,0.7)',
-                fontWeight: 700,
-                fontSize: '0.75rem',
-                px: 3,
-                mb: 1,
-                display: 'block',
-                letterSpacing: 1
+        {Object.entries(navigationSections).map(([sectionKey, section]) => (
+          <Box key={sectionKey} sx={{ mb: 1 }}>
+            {/* Section Header */}
+            <ListItemButton
+              onClick={() => handleSectionToggle(sectionKey)}
+              sx={{
+                mx: 1,
+                mb: 0.5,
+                borderRadius: 2,
+                background: 'rgba(255,255,255,0.1)',
+                backdropFilter: 'blur(10px)',
+                border: '1px solid rgba(255,255,255,0.1)',
+                '&:hover': {
+                  background: 'rgba(255,255,255,0.2)',
+                }
               }}
             >
-              {category}
-            </Typography>
+              <ListItemIcon sx={{ color: section.color, minWidth: 36 }}>
+                <Badge 
+                  badgeContent={section.items.filter(item => activePanel === item.key).length} 
+                  color="error"
+                  sx={{
+                    '& .MuiBadge-badge': {
+                      backgroundColor: section.color,
+                      color: 'white',
+                      fontSize: '0.6rem',
+                      minWidth: 16,
+                      height: 16
+                    }
+                  }}
+                >
+                  {section.icon}
+                </Badge>
+              </ListItemIcon>
+              <ListItemText
+                primary={section.title}
+                primaryTypographyProps={{
+                  fontSize: { xs: '0.8rem', md: '0.9rem' },
+                  fontWeight: 700,
+                  color: 'white'
+                }}
+              />
+              {expandedSections[sectionKey] ? 
+                <ExpandLessIcon sx={{ color: 'white' }} /> : 
+                <ExpandMoreIcon sx={{ color: 'white' }} />
+              }
+            </ListItemButton>
 
-            {/* Category Items */}
-            <List sx={{ px: 1 }}>
-              {items.map((item, index) => (
-                <ListItem key={item.key} disablePadding sx={{ mb: 0.5 }}>
-                  <Tooltip 
-                    title={isMobile ? '' : item.text} 
-                    placement="right"
-                    arrow
-                  >
-                    <ListItemButton
-                      selected={activePanel === item.key}
-                      onClick={() => handleItemClick(item.key)}
-                      sx={{
-                        borderRadius: 3,
-                        mx: 1,
-                        px: 2,
-                        py: 1.5,
-                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                        position: 'relative',
-                        overflow: 'hidden',
-                        minHeight: 56,
-                        '&.Mui-selected': {
-                          backgroundColor: 'rgba(255,255,255,0.2)',
-                          backdropFilter: 'blur(10px)',
-                          color: 'white',
-                          boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
-                          transform: 'translateX(4px)',
-                          border: `2px solid ${item.color}`,
-                          '&::before': {
-                            content: '""',
-                            position: 'absolute',
-                            left: 0,
-                            top: 0,
-                            bottom: 0,
-                            width: 4,
-                            backgroundColor: item.color,
-                            borderRadius: '0 2px 2px 0',
+            {/* Section Items */}
+            <Collapse in={expandedSections[sectionKey]} timeout="auto" unmountOnExit>
+              <List sx={{ pl: 1 }}>
+                {section.items.map((item) => (
+                  <ListItem key={item.key} disablePadding sx={{ mb: 0.25 }}>
+                    <Tooltip 
+                      title={isMobile ? '' : item.text} 
+                      placement="right"
+                      arrow
+                    >
+                      <ListItemButton
+                        selected={activePanel === item.key}
+                        onClick={() => handleItemClick(item.key)}
+                        sx={{
+                          borderRadius: 2,
+                          mx: 1,
+                          px: { xs: 1.5, md: 2 },
+                          py: { xs: 0.75, md: 1 },
+                          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                          position: 'relative',
+                          overflow: 'hidden',
+                          minHeight: { xs: 40, md: 48 },
+                          '&.Mui-selected': {
+                            backgroundColor: 'rgba(255,255,255,0.2)',
+                            backdropFilter: 'blur(10px)',
+                            color: 'white',
+                            boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+                            transform: 'translateX(4px)',
+                            border: `2px solid ${item.color}`,
+                            '&::before': {
+                              content: '""',
+                              position: 'absolute',
+                              left: 0,
+                              top: 0,
+                              bottom: 0,
+                              width: 4,
+                              backgroundColor: item.color,
+                              borderRadius: '0 2px 2px 0',
+                            },
+                            '&:hover': {
+                              backgroundColor: 'rgba(255,255,255,0.25)',
+                            },
+                            '& .MuiListItemIcon-root': {
+                              color: item.color,
+                              transform: 'scale(1.1)',
+                            },
+                            '& .MuiListItemText-primary': {
+                              fontWeight: 700,
+                            }
                           },
                           '&:hover': {
-                            backgroundColor: 'rgba(255,255,255,0.25)',
+                            backgroundColor: 'rgba(255,255,255,0.1)',
+                            transform: 'translateX(2px)',
+                            '& .MuiListItemIcon-root': {
+                              color: item.color,
+                              transform: 'scale(1.05)',
+                            },
                           },
-                          '& .MuiListItemIcon-root': {
-                            color: item.color,
-                            transform: 'scale(1.1)',
-                          },
-                          '& .MuiListItemText-primary': {
-                            fontWeight: 700,
-                          }
-                        },
-                        '&:hover': {
-                          backgroundColor: 'rgba(255,255,255,0.1)',
-                          transform: 'translateX(2px)',
-                          '& .MuiListItemIcon-root': {
-                            color: item.color,
-                            transform: 'scale(1.05)',
-                          },
-                        },
-                      }}
-                    >
-                      <ListItemIcon
-                        sx={{
-                          minWidth: 40,
-                          color: 'rgba(255,255,255,0.8)',
-                          transition: 'all 0.3s ease',
                         }}
                       >
-                        {item.icon}
-                      </ListItemIcon>
-                      <ListItemText
-                        primary={item.text}
-                        primaryTypographyProps={{
-                          fontSize: '0.9rem',
-                          fontWeight: 500,
-                          color: 'rgba(255,255,255,0.9)'
-                        }}
-                      />
-                      {/* Active indicator dot */}
-                      {activePanel === item.key && (
-                        <Box
+                        <ListItemIcon
                           sx={{
-                            width: 8,
-                            height: 8,
-                            borderRadius: '50%',
-                            backgroundColor: item.color,
-                            boxShadow: `0 0 10px ${item.color}`,
+                            minWidth: { xs: 32, md: 36 },
+                            color: 'rgba(255,255,255,0.8)',
+                            transition: 'all 0.3s ease',
+                          }}
+                        >
+                          {item.icon}
+                        </ListItemIcon>
+                        <ListItemText
+                          primary={item.text}
+                          primaryTypographyProps={{
+                            fontSize: { xs: '0.75rem', md: '0.85rem' },
+                            fontWeight: 500,
+                            color: 'rgba(255,255,255,0.9)'
                           }}
                         />
-                      )}
-                    </ListItemButton>
-                  </Tooltip>
-                </ListItem>
-              ))}
-            </List>
+                        {activePanel === item.key && (
+                          <Box
+                            sx={{
+                              width: { xs: 6, md: 8 },
+                              height: { xs: 6, md: 8 },
+                              borderRadius: '50%',
+                              backgroundColor: item.color,
+                              boxShadow: `0 0 10px ${item.color}`,
+                            }}
+                          />
+                        )}
+                      </ListItemButton>
+                    </Tooltip>
+                  </ListItem>
+                ))}
+              </List>
+            </Collapse>
           </Box>
         ))}
       </Box>
 
       {/* Footer */}
       <Box sx={{ 
-        p: 3, 
+        p: { xs: 2, md: 3 }, 
         textAlign: 'center',
         borderTop: '1px solid rgba(255,255,255,0.1)',
         position: 'relative',
@@ -494,7 +559,7 @@ const Sidebar = ({ activePanel, setActivePanel, onItemClick, isMobileOpen, setIs
               sx={{ 
                 color: 'rgba(255,255,255,0.9)',
                 fontWeight: 600,
-                fontSize: '0.75rem'
+                fontSize: { xs: '0.65rem', md: '0.75rem' }
               }}
             >
               System Online
@@ -506,7 +571,7 @@ const Sidebar = ({ activePanel, setActivePanel, onItemClick, isMobileOpen, setIs
             sx={{ 
               color: 'rgba(255,255,255,0.8)',
               fontWeight: 600,
-              fontSize: '0.8rem'
+              fontSize: { xs: '0.7rem', md: '0.8rem' }
             }}
           >
             Climate Tech Solutions
@@ -516,7 +581,7 @@ const Sidebar = ({ activePanel, setActivePanel, onItemClick, isMobileOpen, setIs
             variant="caption" 
             sx={{ 
               color: 'rgba(255,255,255,0.6)',
-              fontSize: '0.7rem'
+              fontSize: { xs: '0.6rem', md: '0.7rem' }
             }}
           >
             Kerala • Laos • Global
