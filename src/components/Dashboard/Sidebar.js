@@ -7,8 +7,6 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Paper,
-  Divider,
   Chip,
   Avatar,
   Stack,
@@ -32,10 +30,8 @@ import LanguageIcon from '@mui/icons-material/Language';
 import Team from '@mui/icons-material/Group';
 import SolutionIcon from '@mui/icons-material/Lightbulb';
 import Contact from '@mui/icons-material/ContactMail';
-import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
-import DashboardIcon from '@mui/icons-material/Dashboard';
 import Testimonial from '@mui/icons-material/Person4';
 import Project from '@mui/icons-material/PresentToAll';
 import Career from '@mui/icons-material/Work';
@@ -59,8 +55,6 @@ const Sidebar = ({ activePanel, setActivePanel, onItemClick, isMobileOpen, setIs
   // Get user data from localStorage
   const user = JSON.parse(localStorage.getItem('user'));
   const userRole = user?.role || '';
-  const userName = user?.name || 'Admin User';
-  const userEmail = user?.email || 'admin@greonxpert.com';
 
   // Organized navigation structure
   const navigationSections = {
@@ -207,11 +201,6 @@ const Sidebar = ({ activePanel, setActivePanel, onItemClick, isMobileOpen, setIs
     }
   };
 
-  // Count active items per section for badge
-  const getActiveCount = (sectionItems) => {
-    return sectionItems.filter(item => activePanel === item.key).length;
-  };
-
   const sidebarContent = (
     <Box
       sx={{
@@ -272,9 +261,9 @@ const Sidebar = ({ activePanel, setActivePanel, onItemClick, isMobileOpen, setIs
         </Box>
       )}
 
-      {/* Header Section */}
+      {/* Compact Header Section */}
       <Box sx={{ 
-        p: { xs: 2, md: 3 }, 
+        p: { xs: 1.5, md: 2 }, 
         textAlign: 'center',
         borderBottom: '1px solid rgba(255,255,255,0.1)',
         position: 'relative',
@@ -282,21 +271,21 @@ const Sidebar = ({ activePanel, setActivePanel, onItemClick, isMobileOpen, setIs
       }}>
         <Avatar
           sx={{
-            width: { xs: 48, md: 64 },
-            height: { xs: 48, md: 64 },
+            width: { xs: 40, md: 48 },
+            height: { xs: 40, md: 48 },
             mx: 'auto',
-            mb: 2,
+            mb: 1,
             background: 'linear-gradient(45deg, #1AC99F, #0E9A78)',
-            fontSize: { xs: '1.2rem', md: '1.5rem' },
+            fontSize: { xs: '1rem', md: '1.2rem' },
             fontWeight: 700,
             boxShadow: '0 4px 20px rgba(0,0,0,0.2)'
           }}
         >
-          <AdminPanelSettingsIcon sx={{ fontSize: { xs: 24, md: 32 } }} />
+          <AdminPanelSettingsIcon sx={{ fontSize: { xs: 20, md: 24 } }} />
         </Avatar>
         
         <Typography 
-          variant={isMobile ? "h6" : "h5"}
+          variant={isMobile ? "subtitle1" : "h6"}
           sx={{ 
             color: 'white',
             fontWeight: 800,
@@ -307,136 +296,95 @@ const Sidebar = ({ activePanel, setActivePanel, onItemClick, isMobileOpen, setIs
           GreonXpert
         </Typography>
         
-        <Typography 
-          variant="body2" 
-          sx={{ 
-            color: 'rgba(255,255,255,0.8)',
-            mb: 2,
-            fontWeight: 500,
-            fontSize: { xs: '0.75rem', md: '0.875rem' }
+        <Chip
+          label={userRole.toUpperCase()}
+          size="small"
+          sx={{
+            bgcolor: userRole === 'superadmin' ? '#FF6B6B' : '#4ECDC4',
+            color: 'white',
+            fontWeight: 600,
+            fontSize: '0.6rem',
+            height: { xs: 18, md: 20 }
           }}
-        >
-          Admin Dashboard
-        </Typography>
-
-        {/* User Info */}
-        <Box sx={{ 
-          background: 'rgba(255,255,255,0.1)',
-          borderRadius: 3,
-          p: { xs: 1.5, md: 2 },
-          backdropFilter: 'blur(10px)',
-          border: '1px solid rgba(255,255,255,0.1)'
-        }}>
-          <Typography 
-            variant="body2" 
-            sx={{ 
-              color: 'white', 
-              fontWeight: 600, 
-              mb: 0.5,
-              fontSize: { xs: '0.75rem', md: '0.875rem' }
-            }}
-          >
-            {userName}
-          </Typography>
-          <Typography 
-            variant="caption" 
-            sx={{ 
-              color: 'rgba(255,255,255,0.7)',
-              fontSize: { xs: '0.65rem', md: '0.75rem' }
-            }}
-          >
-            {userEmail}
-          </Typography>
-          <Chip
-            label={userRole.toUpperCase()}
-            size="small"
-            sx={{
-              mt: 1,
-              bgcolor: userRole === 'superadmin' ? '#FF6B6B' : '#4ECDC4',
-              color: 'white',
-              fontWeight: 600,
-              fontSize: '0.65rem',
-              height: { xs: 20, md: 24 }
-            }}
-          />
-        </Box>
+        />
       </Box>
 
       {/* Navigation Section with Collapsible Groups */}
       <Box sx={{ 
         flex: 1,
         overflow: 'auto',
-        py: 1,
+        py: 0.5,
         position: 'relative',
         zIndex: 1,
         '&::-webkit-scrollbar': {
-          width: 6,
+          width: 4,
         },
         '&::-webkit-scrollbar-track': {
           background: 'rgba(255,255,255,0.1)',
-          borderRadius: 3,
+          borderRadius: 2,
         },
         '&::-webkit-scrollbar-thumb': {
           background: 'rgba(255,255,255,0.3)',
-          borderRadius: 3,
+          borderRadius: 2,
           '&:hover': {
             background: 'rgba(255,255,255,0.5)',
           }
         },
       }}>
         {Object.entries(navigationSections).map(([sectionKey, section]) => (
-          <Box key={sectionKey} sx={{ mb: 1 }}>
+          <Box key={sectionKey} sx={{ mb: 0.5 }}>
             {/* Section Header */}
             <ListItemButton
               onClick={() => handleSectionToggle(sectionKey)}
               sx={{
-                mx: 1,
-                mb: 0.5,
-                borderRadius: 2,
+                mx: 0.5,
+                mb: 0.25,
+                borderRadius: 1.5,
                 background: 'rgba(255,255,255,0.1)',
                 backdropFilter: 'blur(10px)',
                 border: '1px solid rgba(255,255,255,0.1)',
+                minHeight: { xs: 36, md: 40 },
                 '&:hover': {
                   background: 'rgba(255,255,255,0.2)',
                 }
               }}
             >
-              <ListItemIcon sx={{ color: section.color, minWidth: 36 }}>
+              <ListItemIcon sx={{ color: section.color, minWidth: 28 }}>
                 <Badge 
-                  badgeContent={section.items.filter(item => activePanel === item.key).length} 
+                  badgeContent={section.items.filter(item => activePanel === item.key).length || 0} 
                   color="error"
                   sx={{
                     '& .MuiBadge-badge': {
                       backgroundColor: section.color,
                       color: 'white',
-                      fontSize: '0.6rem',
-                      minWidth: 16,
-                      height: 16
+                      fontSize: '0.5rem',
+                      minWidth: 12,
+                      height: 12
                     }
                   }}
                 >
-                  {section.icon}
+                  {React.cloneElement(section.icon, { sx: { fontSize: { xs: 18, md: 20 } } })}
                 </Badge>
               </ListItemIcon>
               <ListItemText
                 primary={section.title}
                 primaryTypographyProps={{
-                  fontSize: { xs: '0.8rem', md: '0.9rem' },
+                  fontSize: { xs: '0.7rem', md: '0.8rem' },
                   fontWeight: 700,
                   color: 'white'
                 }}
               />
               {expandedSections[sectionKey] ? 
-                <ExpandLessIcon sx={{ color: 'white' }} /> : 
-                <ExpandMoreIcon sx={{ color: 'white' }} />
+                <ExpandLessIcon sx={{ color: 'white', fontSize: 16 }} /> : 
+                <ExpandMoreIcon sx={{ color: 'white', fontSize: 16 }} />
               }
             </ListItemButton>
 
             {/* Section Items */}
             <Collapse in={expandedSections[sectionKey]} timeout="auto" unmountOnExit>
-              <List sx={{ pl: 1 }}>
+              <List sx={{ pl: 0.5 }}>
                 {section.items.map((item) => (
-                  <ListItem key={item.key} disablePadding sx={{ mb: 0.25 }}>
+                  <ListItem key={item.key} disablePadding sx={{ mb: 0.125 }}>
                     <Tooltip 
                       title={isMobile ? '' : item.text} 
                       placement="right"
@@ -446,30 +394,30 @@ const Sidebar = ({ activePanel, setActivePanel, onItemClick, isMobileOpen, setIs
                         selected={activePanel === item.key}
                         onClick={() => handleItemClick(item.key)}
                         sx={{
-                          borderRadius: 2,
-                          mx: 1,
-                          px: { xs: 1.5, md: 2 },
-                          py: { xs: 0.75, md: 1 },
+                          borderRadius: 1.5,
+                          mx: 0.5,
+                          px: { xs: 1, md: 1.5 },
+                          py: { xs: 0.5, md: 0.75 },
                           transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                           position: 'relative',
                           overflow: 'hidden',
-                          minHeight: { xs: 40, md: 48 },
+                          minHeight: { xs: 32, md: 36 },
                           '&.Mui-selected': {
                             backgroundColor: 'rgba(255,255,255,0.2)',
                             backdropFilter: 'blur(10px)',
                             color: 'white',
-                            boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
-                            transform: 'translateX(4px)',
-                            border: `2px solid ${item.color}`,
+                            boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+                            transform: 'translateX(2px)',
+                            border: `1px solid ${item.color}`,
                             '&::before': {
                               content: '""',
                               position: 'absolute',
                               left: 0,
                               top: 0,
                               bottom: 0,
-                              width: 4,
+                              width: 3,
                               backgroundColor: item.color,
-                              borderRadius: '0 2px 2px 0',
+                              borderRadius: '0 1px 1px 0',
                             },
                             '&:hover': {
                               backgroundColor: 'rgba(255,255,255,0.25)',
@@ -484,7 +432,7 @@ const Sidebar = ({ activePanel, setActivePanel, onItemClick, isMobileOpen, setIs
                           },
                           '&:hover': {
                             backgroundColor: 'rgba(255,255,255,0.1)',
-                            transform: 'translateX(2px)',
+                            transform: 'translateX(1px)',
                             '& .MuiListItemIcon-root': {
                               color: item.color,
                               transform: 'scale(1.05)',
@@ -494,17 +442,17 @@ const Sidebar = ({ activePanel, setActivePanel, onItemClick, isMobileOpen, setIs
                       >
                         <ListItemIcon
                           sx={{
-                            minWidth: { xs: 32, md: 36 },
+                            minWidth: { xs: 24, md: 28 },
                             color: 'rgba(255,255,255,0.8)',
                             transition: 'all 0.3s ease',
                           }}
                         >
-                          {item.icon}
+                          {React.cloneElement(item.icon, { sx: { fontSize: { xs: 16, md: 18 } } })}
                         </ListItemIcon>
                         <ListItemText
                           primary={item.text}
                           primaryTypographyProps={{
-                            fontSize: { xs: '0.75rem', md: '0.85rem' },
+                            fontSize: { xs: '0.65rem', md: '0.75rem' },
                             fontWeight: 500,
                             color: 'rgba(255,255,255,0.9)'
                           }}
@@ -512,11 +460,11 @@ const Sidebar = ({ activePanel, setActivePanel, onItemClick, isMobileOpen, setIs
                         {activePanel === item.key && (
                           <Box
                             sx={{
-                              width: { xs: 6, md: 8 },
-                              height: { xs: 6, md: 8 },
+                              width: { xs: 4, md: 6 },
+                              height: { xs: 4, md: 6 },
                               borderRadius: '50%',
                               backgroundColor: item.color,
-                              boxShadow: `0 0 10px ${item.color}`,
+                              boxShadow: `0 0 6px ${item.color}`,
                             }}
                           />
                         )}
@@ -530,25 +478,24 @@ const Sidebar = ({ activePanel, setActivePanel, onItemClick, isMobileOpen, setIs
         ))}
       </Box>
 
-      {/* Footer */}
+      {/* Compact Footer */}
       <Box sx={{ 
-        p: { xs: 2, md: 3 }, 
+        p: { xs: 1, md: 1.5 }, 
         textAlign: 'center',
         borderTop: '1px solid rgba(255,255,255,0.1)',
         position: 'relative',
         zIndex: 1
       }}>
-        <Stack spacing={1} alignItems="center">
+        <Stack spacing={0.5} alignItems="center">
           <Box sx={{ 
             display: 'flex', 
             alignItems: 'center', 
-            gap: 1,
-            mb: 1
+            gap: 0.5
           }}>
             <Box
               sx={{
-                width: 8,
-                height: 8,
+                width: 6,
+                height: 6,
                 borderRadius: '50%',
                 backgroundColor: '#4CAF50',
                 animation: 'pulse 2s infinite'
@@ -559,7 +506,7 @@ const Sidebar = ({ activePanel, setActivePanel, onItemClick, isMobileOpen, setIs
               sx={{ 
                 color: 'rgba(255,255,255,0.9)',
                 fontWeight: 600,
-                fontSize: { xs: '0.65rem', md: '0.75rem' }
+                fontSize: { xs: '0.6rem', md: '0.65rem' }
               }}
             >
               System Online
@@ -567,24 +514,13 @@ const Sidebar = ({ activePanel, setActivePanel, onItemClick, isMobileOpen, setIs
           </Box>
           
           <Typography 
-            variant="body2" 
-            sx={{ 
-              color: 'rgba(255,255,255,0.8)',
-              fontWeight: 600,
-              fontSize: { xs: '0.7rem', md: '0.8rem' }
-            }}
-          >
-            Climate Tech Solutions
-          </Typography>
-          
-          <Typography 
             variant="caption" 
             sx={{ 
-              color: 'rgba(255,255,255,0.6)',
-              fontSize: { xs: '0.6rem', md: '0.7rem' }
+              color: 'rgba(255,255,255,0.7)',
+              fontSize: { xs: '0.55rem', md: '0.6rem' }
             }}
           >
-            Kerala • Laos • Global
+            GreonXpert Private Limited
           </Typography>
         </Stack>
       </Box>
