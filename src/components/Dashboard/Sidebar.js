@@ -49,7 +49,7 @@ const Sidebar = ({ activePanel, setActivePanel, onItemClick, isMobileOpen, setIs
     website: true,
     teams: true,
     leads: true,
-    vlogs: true
+    vlogs: true,
   });
   
   // Get user data from localStorage
@@ -67,7 +67,7 @@ const Sidebar = ({ activePanel, setActivePanel, onItemClick, isMobileOpen, setIs
           text: 'Emissions Panel', 
           key: 'emissions', 
           icon: <BubbleChartIcon />,
-          color: '#FF6B6B'
+          color: '#FF6B6B',
         },
         { 
           text: 'Climate Intelligence', 
