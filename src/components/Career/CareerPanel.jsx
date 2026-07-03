@@ -456,9 +456,10 @@ const CareerPanel = () => {
       </Box>
 
       {/* Main Content - Scrollable */}
-      <Box 
-        sx={{ 
-          flexGrow: 1, 
+      <Box
+        sx={{
+          flexGrow: 1,
+          minWidth: 0,
           overflow: 'auto',
           height: 'calc(100vh - 160px)' // Reduced header space calculation
         }}
@@ -515,8 +516,9 @@ const CareerPanel = () => {
             </Box>
 
             {/* Tab Content - Scrollable */}
-            <Box sx={{ 
-              flexGrow: 1, 
+            <Box sx={{
+              flexGrow: 1,
+              minWidth: 0,
               overflow: 'auto',
               '&::-webkit-scrollbar': {
                 width: '8px',

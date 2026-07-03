@@ -645,8 +645,8 @@ const ApplicationsManager = ({
       ) : (
         <TableContainer component={Paper} sx={{ borderRadius: 3, boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
           {loading && <LinearProgress />}
-          
-          <Table>
+
+          <Table sx={{ minWidth: 900 }}>
             <TableHead sx={{ bgcolor: '#f8f9fa' }}>
               <TableRow>
                 <TableCell padding="checkbox">
@@ -656,13 +656,13 @@ const ApplicationsManager = ({
                     onChange={handleSelectAll}
                   />
                 </TableCell>
-                <TableCell>👤 Applicant</TableCell>
-                <TableCell>📧 Contact</TableCell>
-                <TableCell>💼 Position</TableCell>
-                <TableCell>📊 Status</TableCell>
-                <TableCell>📄 Resume</TableCell>
-                <TableCell>📅 Applied Date</TableCell>
-                <TableCell>⚡ Actions</TableCell>
+                <TableCell sx={{ whiteSpace: 'nowrap' }}>👤 Applicant</TableCell>
+                <TableCell sx={{ whiteSpace: 'nowrap' }}>📧 Contact</TableCell>
+                <TableCell sx={{ whiteSpace: 'nowrap' }}>💼 Position</TableCell>
+                <TableCell sx={{ whiteSpace: 'nowrap' }}>📊 Status</TableCell>
+                <TableCell sx={{ whiteSpace: 'nowrap' }}>📄 Resume</TableCell>
+                <TableCell sx={{ whiteSpace: 'nowrap' }}>📅 Applied Date</TableCell>
+                <TableCell sx={{ whiteSpace: 'nowrap' }}>⚡ Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
