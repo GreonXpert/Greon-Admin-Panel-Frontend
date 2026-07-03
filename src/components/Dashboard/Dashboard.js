@@ -293,6 +293,7 @@ const Dashboard = () => {
           component="main"
           sx={{
             flexGrow: 1,
+            minWidth: 0,
             width: { md: `calc(100% - ${drawerWidth}px)` },
             minHeight: '100vh',
             bgcolor: 'grey.50',

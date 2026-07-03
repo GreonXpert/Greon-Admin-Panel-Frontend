@@ -643,7 +643,21 @@ const ApplicationsManager = ({
           </Typography>
         </Alert>
       ) : (
-        <TableContainer component={Paper} sx={{ borderRadius: 3, boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
+        <TableContainer
+          component={Paper}
+          sx={{
+            borderRadius: 3,
+            boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+            overflowX: 'auto',
+            '&::-webkit-scrollbar': { height: '10px' },
+            '&::-webkit-scrollbar-track': { background: '#f1f1f1' },
+            '&::-webkit-scrollbar-thumb': {
+              background: '#1AC99F',
+              borderRadius: '4px',
+              '&:hover': { background: '#0E9A78' }
+            }
+          }}
+        >
           {loading && <LinearProgress />}
 
           <Table sx={{ minWidth: 900 }}>
