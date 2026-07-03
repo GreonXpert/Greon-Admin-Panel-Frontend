@@ -479,14 +479,14 @@ const ProjectPanel = () => {
       <Box sx={{ flex: 1, overflowY: 'auto', pr: { xs: 0.5, md: 1 }, mb: 5 }}>
         <Grid container spacing={2}>
           {loading ? (
-            <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center', py: 8 }}>
+            <Grid size={12} sx={{ display: 'flex', justifyContent: 'center', py: 8 }}>
               <CircularProgress />
             </Grid>
           ) : (
             filtered.map((p) => {
               const cover = resolveImageUrl(p.mainImage) || resolveImageUrl(p.images?.[0]?.url);
               return (
-                <Grid item xs={12} sm={6} md={4} lg={3} key={p._id}>
+                <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={p._id}>
                   <Card
                     sx={{
                       ...CARD_SX,
@@ -621,12 +621,12 @@ const ProjectPanel = () => {
               <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography sx={{ fontWeight: 700 }}>📝 Basic</Typography></AccordionSummary>
               <AccordionDetails>
                 <Grid container spacing={2}>
-                  <Grid item xs={12} md={8}>
+                  <Grid size={{ xs: 12, md: 8 }}>
                     <TextField fullWidth label="Title *" value={form.title}
                       onChange={(e) => setForm(prev => ({ ...prev, title: e.target.value }))} disabled={submitting} />
                   </Grid>
 
-                    <Grid item xs={12} md={4}>
+                    <Grid size={{ xs: 12, md: 4 }}>
                       <FormControl fullWidth>
                         <InputLabel>Category</InputLabel>
                         <Select value={form.category} label="Category"
@@ -636,7 +636,7 @@ const ProjectPanel = () => {
                       </FormControl>
                     </Grid>
 
-                  <Grid item xs={12} md={4}>
+                  <Grid size={{ xs: 12, md: 4 }}>
                     <FormControl fullWidth>
                       <InputLabel>Status</InputLabel>
                       <Select value={form.status} label="Status"
@@ -646,45 +646,45 @@ const ProjectPanel = () => {
                     </FormControl>
                   </Grid>
 
-                  <Grid item xs={12} md={4}>
+                  <Grid size={{ xs: 12, md: 4 }}>
                     <TextField fullWidth label="Completed Year" value={form.completedYear}
                       onChange={(e) => setForm(prev => ({ ...prev, completedYear: e.target.value }))} disabled={submitting} />
                   </Grid>
-                  <Grid item xs={12} md={4}>
+                  <Grid size={{ xs: 12, md: 4 }}>
                     <TextField fullWidth label="Area" value={form.area}
                       onChange={(e) => setForm(prev => ({ ...prev, area: e.target.value }))} disabled={submitting} />
                   </Grid>
 
-                  <Grid item xs={12} md={6}>
+                  <Grid size={{ xs: 12, md: 6 }}>
                     <TextField fullWidth label="Client" value={form.client}
                       onChange={(e) => setForm(prev => ({ ...prev, client: e.target.value }))} disabled={submitting} />
                   </Grid>
-                  <Grid item xs={12} md={6}>
+                  <Grid size={{ xs: 12, md: 6 }}>
                     <TextField fullWidth label="Architect" value={form.architect}
                       onChange={(e) => setForm(prev => ({ ...prev, architect: e.target.value }))} disabled={submitting} />
                   </Grid>
 
-                  <Grid item xs={12} md={6}>
+                  <Grid size={{ xs: 12, md: 6 }}>
                     <TextField fullWidth label="Location" value={form.location}
                       onChange={(e) => setForm(prev => ({ ...prev, location: e.target.value }))} disabled={submitting}
                       InputProps={{ startAdornment: (<InputAdornment position="start"><PlaceIcon /></InputAdornment>) }} />
                   </Grid>
 
-                  <Grid item xs={6} md={3}>
+                  <Grid size={{ xs: 6, md: 3 }}>
                     <TextField fullWidth label="Longitude" value={form.lng}
                       onChange={(e) => setForm(prev => ({ ...prev, lng: e.target.value }))} disabled={submitting} />
                   </Grid>
-                  <Grid item xs={6} md={3}>
+                  <Grid size={{ xs: 6, md: 3 }}>
                     <TextField fullWidth label="Latitude" value={form.lat}
                       onChange={(e) => setForm(prev => ({ ...prev, lat: e.target.value }))} disabled={submitting} />
                   </Grid>
 
-                  <Grid item xs={12}>
+                  <Grid size={12}>
                     <TextField fullWidth multiline rows={3} label="Short Description *"
                       value={form.description}
                       onChange={(e) => setForm(prev => ({ ...prev, description: e.target.value }))} disabled={submitting} />
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid size={12}>
                     <TextField fullWidth multiline rows={5} label="About"
                       value={form.about} onChange={(e) => setForm(prev => ({ ...prev, about: e.target.value }))} disabled={submitting} />
                   </Grid>
@@ -697,7 +697,7 @@ const ProjectPanel = () => {
               <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography sx={{ fontWeight: 700 }}>📸 Images</Typography></AccordionSummary>
               <AccordionDetails>
                 <Grid container spacing={2}>
-                  <Grid item xs={12} md={6}>
+                  <Grid size={{ xs: 12, md: 6 }}>
                     <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 1 }}>Cover Image (mainImage)</Typography>
                     <Button component="label" startIcon={<CloudUploadIcon />}
                       disabled={submitting}
@@ -706,7 +706,7 @@ const ProjectPanel = () => {
                       <input type="file" hidden accept="image/*" onChange={onPickCover} />
                     </Button>
                   </Grid>
-                  <Grid item xs={12} md={6}>
+                  <Grid size={{ xs: 12, md: 6 }}>
                     <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 1 }}>Gallery Images (max 12)</Typography>
                     <Button component="label" startIcon={<CloudUploadIcon />}
                       disabled={form.existingGallery.length + form.images.length >= 12 || submitting}
@@ -723,7 +723,7 @@ const ProjectPanel = () => {
                     <Typography variant="subtitle2" sx={{ mb: 1.5, fontWeight: 700 }}>Current Gallery</Typography>
                     <Grid container spacing={2}>
                       {form.existingGallery.map((img, idx) => (
-                        <Grid item xs={6} sm={4} md={3} key={idx}>
+                        <Grid size={{ xs: 6, sm: 4, md: 3 }} key={idx}>
                           <Box sx={{ position: 'relative', borderRadius: 2, overflow: 'hidden', border: '1px solid #eee' }}>
                             <img src={resolveImageUrl(img.serverUrl) || img.url} alt={`Current ${idx + 1}`} style={{ width: '100%', height: 120, objectFit: 'cover' }} />
                             <IconButton
@@ -746,7 +746,7 @@ const ProjectPanel = () => {
                     <Typography variant="subtitle2" sx={{ mb: 1.5, fontWeight: 700 }}>New Images</Typography>
                     <Grid container spacing={2}>
                       {form.imagePreviews.map((preview, idx) => (
-                        <Grid item xs={6} sm={4} md={3} key={idx}>
+                        <Grid size={{ xs: 6, sm: 4, md: 3 }} key={idx}>
                           <Box sx={{ position: 'relative', borderRadius: 2, overflow: 'hidden', border: '1px solid #eee' }}>
                             <img src={preview} alt={`New ${idx + 1}`} style={{ width: '100%', height: 120, objectFit: 'cover' }} />
                             <Chip label="New" size="small"
@@ -779,7 +779,7 @@ const ProjectPanel = () => {
                     { key: 'gradientFrom', label: 'Gradient From (style.gradient.from)' },
                     { key: 'gradientTo', label: 'Gradient To (style.gradient.to)' },
                   ].map(({ key, label }) => (
-                    <Grid item xs={12} sm={6} md={4} key={key}>
+                    <Grid size={{ xs: 12, sm: 6, md: 4 }} key={key}>
                       <TextField
                         fullWidth
                         label={label}
@@ -816,7 +816,7 @@ const ProjectPanel = () => {
                     </Grid>
                   ))}
 
-                  <Grid item xs={12}>
+                  <Grid size={12}>
                     <Box sx={{
                       mt: 2, p: 2, borderRadius: 2, border: '1px solid #e5e7eb',
                       background: isValidHex(form.gradientFrom) && isValidHex(form.gradientTo)
@@ -837,14 +837,14 @@ const ProjectPanel = () => {
               <AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography sx={{ fontWeight: 700 }}>⚙️ Settings</Typography></AccordionSummary>
               <AccordionDetails>
                 <Grid container spacing={2}>
-                  <Grid item xs={12} md={4}>
+                  <Grid size={{ xs: 12, md: 4 }}>
                     <TextField
                       fullWidth type="number" label="Display Order"
                       value={form.order} onChange={(e) => setForm(prev => ({ ...prev, order: parseInt(e.target.value) || 0 }))}
                       disabled={submitting}
                     />
                   </Grid>
-                  <Grid item xs={12} md={4}>
+                  <Grid size={{ xs: 12, md: 4 }}>
                     <FormControlLabel
                       control={<Switch checked={form.featured} onChange={(e) => setForm(prev => ({ ...prev, featured: e.target.checked }))} />}
                       label="Featured"

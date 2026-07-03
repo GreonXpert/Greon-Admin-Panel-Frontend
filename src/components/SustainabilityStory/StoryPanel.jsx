@@ -790,7 +790,7 @@ const StoryPanel = () => {
               const IconComponent = CATEGORY_ICONS[story.category];
 
               return (
-                <Grid item xs={12} sm={6} md={4} key={story._id}>
+                <Grid size={{ xs: 12, sm: 6, md: 4 }} key={story._id}>
                   <Card
                     sx={{
                       height: '100%',
@@ -1170,7 +1170,7 @@ const StoryPanel = () => {
               </QuillContainer>
               
               <Grid container spacing={2} sx={{ mt: 2 }}>
-                <Grid item xs={12} sm={6}>
+                <Grid size={{ xs: 12, sm: 6 }}>
                   <TextField
                     select
                     label="Category"
@@ -1183,7 +1183,7 @@ const StoryPanel = () => {
                     <MenuItem value="Resources">Resources</MenuItem>
                   </TextField>
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid size={{ xs: 12, sm: 6 }}>
                   <TextField
                     label="URL Slug"
                     value={form.link}
@@ -1226,7 +1226,7 @@ const StoryPanel = () => {
               {form.category === 'Blog' && (
                 <>
                   <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
                       <TextField
                         label="Author"
                         value={form.author}
@@ -1234,7 +1234,7 @@ const StoryPanel = () => {
                         fullWidth
                       />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
                       <TextField
                         label="Read Time"
                         value={form.readTime}
@@ -1250,7 +1250,7 @@ const StoryPanel = () => {
               {form.category === 'Video' && (
                 <>
                   <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
                       <TextField
                         label="Duration"
                         value={form.duration}
@@ -1259,7 +1259,7 @@ const StoryPanel = () => {
                         placeholder="e.g., 15:30"
                       />
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid size={12}>
                       <TextField
                         label="Video URL"
                         value={form.videoUrl}
@@ -1275,7 +1275,7 @@ const StoryPanel = () => {
               {form.category === 'Resources' && (
                 <>
                   <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
                       <TextField
                         select
                         label="File Type"
@@ -1290,7 +1290,7 @@ const StoryPanel = () => {
                       </TextField>
                     </Grid>
                     {form.fileType === 'PDF' && (
-                      <Grid item xs={12} sm={6}>
+                      <Grid size={{ xs: 12, sm: 6 }}>
                         <TextField
                           label="Pages"
                           value={form.pages}
@@ -1375,7 +1375,7 @@ const StoryPanel = () => {
               {/* File Uploads */}
               <Grid container spacing={2}>
                 {/* Main Image */}
-                <Grid item xs={12} sm={6}>
+                <Grid size={{ xs: 12, sm: 6 }}>
                   <input
                     accept="image/*"
                     style={{ display: 'none' }}
@@ -1412,7 +1412,7 @@ const StoryPanel = () => {
 
                 {/* Author Image */}
                 {form.category === 'Blog' && (
-                  <Grid item xs={12} sm={6}>
+                  <Grid size={{ xs: 12, sm: 6 }}>
                     <input
                       accept="image/*"
                       style={{ display: 'none' }}
@@ -1450,7 +1450,7 @@ const StoryPanel = () => {
 
                 {/* Resource File */}
                 {form.category === 'Resources' && (
-                  <Grid item xs={12} sm={6}>
+                  <Grid size={{ xs: 12, sm: 6 }}>
                     <input
                       accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"
                       style={{ display: 'none' }}

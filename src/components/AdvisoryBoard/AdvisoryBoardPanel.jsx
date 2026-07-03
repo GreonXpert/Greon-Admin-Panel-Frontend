@@ -552,7 +552,7 @@ const AdvisoryBoardPanel = () => {
               const expertise = normalizeExpertise(m.expertise);
 
               return (
-                <Grid item xs={12} sm={6} key={m._id}>
+                <Grid size={{ xs: 12, sm: 6 }} key={m._id}>
                   {/* ✅ FIXED: Even-sized Cards with Centered Content */}
                   <Card sx={{ 
                     height: 420, // Fixed height for consistency

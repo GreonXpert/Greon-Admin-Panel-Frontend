@@ -342,7 +342,7 @@ const CareerPanel = () => {
             }}>
               {/* Stats Cards - Compact & Responsive */}
               <Grid container spacing={{ xs: 1.5, sm: 2 }}> {/* Reduced spacing */}
-                <Grid item xs={6} sm={6} md={3}>
+                <Grid size={{ xs: 6, sm: 6, md: 3 }}>
                   <Paper sx={{ 
                     p: { xs: 1, sm: 1.5 }, // Reduced padding
                     textAlign: 'center', 
@@ -369,7 +369,7 @@ const CareerPanel = () => {
                   </Paper>
                 </Grid>
                 
-                <Grid item xs={6} sm={6} md={3}>
+                <Grid size={{ xs: 6, sm: 6, md: 3 }}>
                   <Paper sx={{ 
                     p: { xs: 1, sm: 1.5 }, 
                     textAlign: 'center', 
@@ -396,7 +396,7 @@ const CareerPanel = () => {
                   </Paper>
                 </Grid>
                 
-                <Grid item xs={6} sm={6} md={3}>
+                <Grid size={{ xs: 6, sm: 6, md: 3 }}>
                   <Paper sx={{ 
                     p: { xs: 1, sm: 1.5 }, 
                     textAlign: 'center', 
@@ -423,7 +423,7 @@ const CareerPanel = () => {
                   </Paper>
                 </Grid>
                 
-                <Grid item xs={6} sm={6} md={3}>
+                <Grid size={{ xs: 6, sm: 6, md: 3 }}>
                   <Paper sx={{ 
                     p: { xs: 1, sm: 1.5 }, 
                     textAlign: 'center', 
@@ -502,13 +502,13 @@ const CareerPanel = () => {
               >
                 <Tab
                   icon={<GroupIcon />}
-                  label={`Applications (${totalApplications})`}
+                  label={`Applications (${stats.totalApplications})`}
                   iconPosition="start"
                   sx={{ mr: { xs: 1, sm: 2 } }}
                 />
                 <Tab
                   icon={<WorkIcon />}
-                  label={`Jobs (${totalJobs})`}
+                  label={`Jobs (${stats.totalJobs})`}
                   iconPosition="start"
                 />
               </Tabs>

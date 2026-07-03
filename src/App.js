@@ -5,6 +5,8 @@ import Register from './components/Auth/Register';
 import Dashboard from './components/Dashboard/Dashboard';
 import ExternalSubmission from './Pages/ExternalSubmission';
 import TestimonialSubmission from './Pages/TestimonialSubmission';
+import Careers from './Pages/Careers';
+import JobApplication from './Pages/JobApplication';
 
 /**
  * A component to protect routes that require authentication.
@@ -25,6 +27,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/submit/:token" element={<ExternalSubmission />} />
         <Route path="/testimonials/submit/:code" element={<TestimonialSubmission />} />
+        <Route path="/careers" element={<Careers />} />
+        <Route path="/careers/:id" element={<JobApplication />} />
         
         {/* Protected Dashboard Route */}
         <Route 

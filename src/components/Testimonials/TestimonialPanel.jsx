@@ -199,7 +199,7 @@ const TestimonialSubmissionPanel = ({ switchToManage }) => {
         <SoftCard>
           <CardContent sx={{ p: 3 }}>
             <Grid container spacing={3} alignItems="center">
-              <Grid item xs={12} md={4}>
+              <Grid size={{ xs: 12, md: 4 }}>
                 <Box sx={{ p: 3, borderRadius: 3, background: 'rgba(26,201,159,0.06)', border: `1px dashed ${toRGBA(BRAND_A, 0.35)}` }}>
                   <Typography variant="caption" sx={{ color: '#64748b', display: 'block', mb: .5 }}>
                     Current Testimonials
@@ -209,7 +209,7 @@ const TestimonialSubmissionPanel = ({ switchToManage }) => {
                   </Typography>
                 </Box>
               </Grid>
-              <Grid item xs={12} md={8}>
+              <Grid size={{ xs: 12, md: 8 }}>
                 <Typography variant="caption" sx={{ color: '#64748b', display: 'block', mb: .5 }}>
                   Public Submission URL
                 </Typography>
@@ -283,7 +283,7 @@ const TestimonialCardView = ({ testimonials, onView, onEdit, onDelete, onStatusC
   return (
     <Grid container spacing={3}>
       {testimonials.map((testimonial) => (
-        <Grid item xs={12} sm={6} key={testimonial._id}>
+        <Grid size={{ xs: 12, sm: 6 }} key={testimonial._id}>
           <TestimonialCard>
             <CardContent sx={{ p: 3, flex: 1 }}>
               {/* Header with Avatar and Name */}

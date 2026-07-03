@@ -435,7 +435,7 @@ const PoweredBySciencePanel = () => {
           ) : (
             <Grid container spacing={3}>
               {filteredFrameworks.map(fw => (
-                <Grid item xs={12} sm={6} md={4} key={fw._id}>
+                <Grid size={{ xs: 12, sm: 6, md: 4 }} key={fw._id}>
                   <Card
                     sx={{
                       height: '100%',
@@ -683,7 +683,7 @@ const PoweredBySciencePanel = () => {
         
         <DialogContent sx={{ pt: 3 }}>
           <Grid container spacing={2}>
-            <Grid item xs={12}>
+            <Grid size={12}>
               <TextField
                 autoFocus
                 label="Framework Name"
@@ -693,7 +693,7 @@ const PoweredBySciencePanel = () => {
                 onChange={e => setFrameworkForm({...frameworkForm, name: e.target.value})}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid size={12}>
               <TextField
                 label="Description"
                 fullWidth
@@ -704,7 +704,7 @@ const PoweredBySciencePanel = () => {
                 onChange={e => setFrameworkForm({...frameworkForm, description: e.target.value})}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <FormControl fullWidth>
                 <InputLabel>Category</InputLabel>
                 <Select
@@ -720,7 +720,7 @@ const PoweredBySciencePanel = () => {
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <input
                 accept="image/*"
                 style={{ display: 'none' }}

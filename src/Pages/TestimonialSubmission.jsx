@@ -424,7 +424,7 @@ export default function TestimonialSubmission() {
           <Grid container spacing={{ xs: 3, md: 4 }}>
             
             {/* Right Side - Form Card (1/3 width) */}
-            <Grid item xs={12} md={4}>
+            <Grid size={{ xs: 12, md: 4 }}>
               <Card
                 elevation={0}
                 sx={{
@@ -742,7 +742,7 @@ export default function TestimonialSubmission() {
             </Grid>
             
             {/* Left Side - Preview Cards (2/3 width) */}
-            <Grid item xs={12} md={8}>
+            <Grid size={{ xs: 12, md: 8 }}>
               <Stack spacing={3}>
                 
                 {/* Live Preview Card */}

@@ -611,7 +611,7 @@ const TeamPanel = () => {
         ) : (
           <Grid container spacing={3}>
             {filtered.map((member) => (
-              <Grid item xs={12} sm={6} key={member._id}>
+              <Grid size={{ xs: 12, sm: 6 }} key={member._id}>
                 <Card 
                   sx={{ 
                     height: '100%',
@@ -984,7 +984,7 @@ const TeamPanel = () => {
             </AccordionSummary>
             <AccordionDetails>
               <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
+                <Grid size={{ xs: 12, sm: 6 }}>
                   <TextField
                     label="Name *"
                     fullWidth
@@ -993,7 +993,7 @@ const TeamPanel = () => {
                     disabled={submitting}
                   />
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid size={{ xs: 12, sm: 6 }}>
                   <TextField
                     label="Role *"
                     fullWidth
@@ -1002,7 +1002,7 @@ const TeamPanel = () => {
                     disabled={submitting}
                   />
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid size={{ xs: 12, sm: 6 }}>
                   <FormControl fullWidth>
                     <InputLabel>Department</InputLabel>
                     <Select
@@ -1017,7 +1017,7 @@ const TeamPanel = () => {
                     </Select>
                   </FormControl>
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid size={{ xs: 12, sm: 6 }}>
                   <TextField
                     label="Location"
                     fullWidth
@@ -1026,7 +1026,7 @@ const TeamPanel = () => {
                     disabled={submitting}
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid size={12}>
                   <TextField
                     label="Bio *"
                     fullWidth
@@ -1038,7 +1038,7 @@ const TeamPanel = () => {
                     disabled={submitting}
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid size={12}>
                   <TextField
                     label="Description *"
                     fullWidth
@@ -1061,7 +1061,7 @@ const TeamPanel = () => {
             </AccordionSummary>
             <AccordionDetails>
               <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
+                <Grid size={{ xs: 12, sm: 6 }}>
                   <TextField
                     label="Email"
                     fullWidth
@@ -1071,7 +1071,7 @@ const TeamPanel = () => {
                     disabled={submitting}
                   />
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid size={{ xs: 12, sm: 6 }}>
                   <TextField
                     label="LinkedIn"
                     fullWidth
@@ -1080,7 +1080,7 @@ const TeamPanel = () => {
                     disabled={submitting}
                   />
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid size={{ xs: 12, sm: 6 }}>
                   <TextField
                     label="Twitter"
                     fullWidth
@@ -1089,7 +1089,7 @@ const TeamPanel = () => {
                     disabled={submitting}
                   />
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid size={{ xs: 12, sm: 6 }}>
                   <TextField
                     label="GitHub"
                     fullWidth
@@ -1134,7 +1134,7 @@ const TeamPanel = () => {
                   </Typography>
                   <Grid container spacing={2}>
                     {form.existingImagePreviews.map((image, index) => (
-                      <Grid item xs={6} sm={4} md={3} key={index}>
+                      <Grid size={{ xs: 6, sm: 4, md: 3 }} key={index}>
                         <Box sx={{ position: 'relative' }}>
                           {index === 0 && (
                             <Chip
@@ -1192,7 +1192,7 @@ const TeamPanel = () => {
                   </Typography>
                   <Grid container spacing={2}>
                     {form.imagePreviews.map((preview, index) => (
-                      <Grid item xs={6} sm={4} md={3} key={index}>
+                      <Grid size={{ xs: 6, sm: 4, md: 3 }} key={index}>
                         <Box sx={{ position: 'relative' }}>
                           <img
                             src={preview}
@@ -1301,7 +1301,7 @@ const TeamPanel = () => {
             </AccordionSummary>
             <AccordionDetails>
               <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
+                <Grid size={{ xs: 12, sm: 6 }}>
                   <FormControl fullWidth>
                     <InputLabel>Status</InputLabel>
                     <Select
@@ -1316,7 +1316,7 @@ const TeamPanel = () => {
                     </Select>
                   </FormControl>
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid size={{ xs: 12, sm: 6 }}>
                   <TextField
                     label="Display Order"
                     type="number"
@@ -1326,7 +1326,7 @@ const TeamPanel = () => {
                     disabled={submitting}
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid size={12}>
                   <FormControlLabel
                     control={
                       <Switch

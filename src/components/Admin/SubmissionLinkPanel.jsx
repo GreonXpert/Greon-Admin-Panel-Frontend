@@ -417,7 +417,7 @@ const SubmissionLinkPanel = () => {
               const inactive = !link.isActive;
 
               return (
-                <Grid item xs={12} sm={6} key={link._id}>
+                <Grid size={{ xs: 12, sm: 6 }} key={link._id}>
                   <StyledCard isExpired={expired} isInactive={inactive}>
                     <CardContent sx={{ flexGrow: 1, p: 3, pt: 2, position: 'relative' }}>
                       {/* Status Indicators */}
@@ -667,7 +667,7 @@ const SubmissionLinkPanel = () => {
         
         <DialogContent sx={{ pt: 3 }}>
           <Grid container spacing={2}>
-            <Grid item xs={12}>
+            <Grid size={12}>
               <TextField
                 label="Title *"
                 fullWidth
@@ -678,7 +678,7 @@ const SubmissionLinkPanel = () => {
                 helperText={!formData.title.trim() ? 'Title is required' : ''}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid size={12}>
               <TextField
                 label="Description"
                 fullWidth
@@ -688,7 +688,7 @@ const SubmissionLinkPanel = () => {
                 onChange={e => setFormData({ ...formData, description: e.target.value })}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid size={12}>
               <TextField
                 select
                 label="Allowed Categories *"
@@ -705,7 +705,7 @@ const SubmissionLinkPanel = () => {
                 <MenuItem value="Resources">Resources</MenuItem>
               </TextField>
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 label="Max Submissions"
                 type="number"
@@ -715,7 +715,7 @@ const SubmissionLinkPanel = () => {
                 inputProps={{ min: 1, max: 100 }}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 label="Expires In (Days)"
                 type="number"

@@ -690,7 +690,7 @@ const TrustedByPanel = () => {
 
           <Grid container spacing={2}>
             {partnerships.length === 0 && !loading && (
-              <Grid item xs={12}>
+              <Grid size={12}>
                 <Paper 
                   sx={{ 
                     p: 4, 
@@ -713,7 +713,7 @@ const TrustedByPanel = () => {
             
             {loading && (
               [...Array(4)].map((_, index) => (
-                <Grid item xs={12} sm={6} md={4} xl={3} key={index}>
+                <Grid size={{ xs: 12, sm: 6, md: 4, xl: 3 }} key={index}>
                   <Card sx={{ height: 280 }}>
                     <Skeleton variant="rectangular" height={100} />
                     <CardContent>
@@ -727,7 +727,7 @@ const TrustedByPanel = () => {
             )}
             
             {partnerships.map((partnership) => (
-              <Grid item xs={12} sm={6} md={4} xl={3} key={partnership._id}>
+              <Grid size={{ xs: 12, sm: 6, md: 4, xl: 3 }} key={partnership._id}>
                 <Card 
                   sx={{ 
                     height: 280,
@@ -856,7 +856,7 @@ const TrustedByPanel = () => {
 
           <Grid container spacing={2}>
             {recognitions.length === 0 && !loading && (
-              <Grid item xs={12}>
+              <Grid size={12}>
                 <Paper 
                   sx={{ 
                     p: 4, 
@@ -878,7 +878,7 @@ const TrustedByPanel = () => {
             )}
             
             {recognitions.map((recognition) => (
-              <Grid item xs={12} sm={6} md={4} xl={3} key={recognition._id}>
+              <Grid size={{ xs: 12, sm: 6, md: 4, xl: 3 }} key={recognition._id}>
                 <Card 
                   sx={{ 
                     height: 240,
@@ -994,7 +994,7 @@ const TrustedByPanel = () => {
 
           <Grid container spacing={2}>
             {productIcons.length === 0 && !loading && (
-              <Grid item xs={12}>
+              <Grid size={12}>
                 <Paper 
                   sx={{ 
                     p: 4, 
@@ -1016,7 +1016,7 @@ const TrustedByPanel = () => {
             )}
             
             {productIcons.map((productIcon) => (
-              <Grid item xs={12} sm={6} md={4} xl={3} key={productIcon._id}>
+              <Grid size={{ xs: 12, sm: 6, md: 4, xl: 3 }} key={productIcon._id}>
                 <Card 
                   sx={{ 
                     height: 280,
@@ -1371,7 +1371,7 @@ const TrustedByPanel = () => {
             </Button>
             
             <Grid container spacing={2} sx={{ mt: 1 }}>
-              <Grid item xs={6}>
+              <Grid size={6}>
                 <Typography variant="subtitle2" gutterBottom>Current Logo:</Typography>
                 <Box
                   sx={{
@@ -1392,7 +1392,7 @@ const TrustedByPanel = () => {
                   />
                 </Box>
               </Grid>
-              <Grid item xs={6}>
+              <Grid size={6}>
                 <Typography variant="subtitle2" gutterBottom>New Logo:</Typography>
                 {editPartnershipImagePreview ? (
                   <Box
@@ -1481,7 +1481,7 @@ const TrustedByPanel = () => {
             </Button>
             
             <Grid container spacing={2} sx={{ mt: 1 }}>
-              <Grid item xs={6}>
+              <Grid size={6}>
                 <Typography variant="subtitle2" gutterBottom>Current Logo:</Typography>
                 <Box
                   sx={{
@@ -1502,7 +1502,7 @@ const TrustedByPanel = () => {
                   />
                 </Box>
               </Grid>
-              <Grid item xs={6}>
+              <Grid size={6}>
                 <Typography variant="subtitle2" gutterBottom>New Logo:</Typography>
                 {editRecognitionImagePreview ? (
                   <Box
@@ -1600,7 +1600,7 @@ const TrustedByPanel = () => {
             </Button>
             
             <Grid container spacing={2} sx={{ mt: 1 }}>
-              <Grid item xs={6}>
+              <Grid size={6}>
                 <Typography variant="subtitle2" gutterBottom>Current Image:</Typography>
                 <Box
                   sx={{
@@ -1621,7 +1621,7 @@ const TrustedByPanel = () => {
                   />
                 </Box>
               </Grid>
-              <Grid item xs={6}>
+              <Grid size={6}>
                 <Typography variant="subtitle2" gutterBottom>New Image:</Typography>
                 {editProductIconImagePreview ? (
                   <Box

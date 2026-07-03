@@ -531,7 +531,7 @@ const PendingSubmissionsPanel = () => {
               const isExpanded = expandedSubmissions.has(submission._id);
 
               return (
-                <Grid item xs={12} sm={6} key={submission._id}>
+                <Grid size={{ xs: 12, sm: 6 }} key={submission._id}>
                   <StyledCard status={submission.status}>
                     <CardContent sx={{ flexGrow: 1, p: 3, pt: 2, position: 'relative' }}>
                       {/* Status Chip */}
@@ -666,7 +666,7 @@ const PendingSubmissionsPanel = () => {
                               </Typography>
                               <Grid container spacing={1}>
                                 {submission.imageUrls?.main && (
-                                  <Grid item xs={4}>
+                                  <Grid size={4}>
                                     <Box sx={{ textAlign: 'center' }}>
                                       <SubmissionImage 
                                         src={submission.imageUrls.main} 
@@ -681,7 +681,7 @@ const PendingSubmissionsPanel = () => {
                                   </Grid>
                                 )}
                                 {submission.imageUrls?.author && (
-                                  <Grid item xs={4}>
+                                  <Grid size={4}>
                                     <Box sx={{ textAlign: 'center' }}>
                                       <SubmissionImage 
                                         src={submission.imageUrls.author} 
@@ -696,7 +696,7 @@ const PendingSubmissionsPanel = () => {
                                   </Grid>
                                 )}
                                 {submission.imageUrls?.file && (
-                                  <Grid item xs={4}>
+                                  <Grid size={4}>
                                     <Box sx={{ 
                                       display: 'flex', 
                                       alignItems: 'center', 
@@ -955,7 +955,7 @@ const PendingSubmissionsPanel = () => {
                 <AccordionDetails>
                   <Grid container spacing={2}>
                     {viewDialog.submission.imageUrls?.main && (
-                      <Grid item xs={12} sm={4}>
+                      <Grid size={{ xs: 12, sm: 4 }}>
                         <Box sx={{ textAlign: 'center' }}>
                           <Typography variant="subtitle2" sx={{ mb: 1, fontWeight: 600 }}>
                             Main Image
@@ -970,7 +970,7 @@ const PendingSubmissionsPanel = () => {
                       </Grid>
                     )}
                     {viewDialog.submission.imageUrls?.author && (
-                      <Grid item xs={12} sm={4}>
+                      <Grid size={{ xs: 12, sm: 4 }}>
                         <Box sx={{ textAlign: 'center' }}>
                           <Typography variant="subtitle2" sx={{ mb: 1, fontWeight: 600 }}>
                             Author Image
@@ -985,7 +985,7 @@ const PendingSubmissionsPanel = () => {
                       </Grid>
                     )}
                     {viewDialog.submission.imageUrls?.file && (
-                      <Grid item xs={12} sm={4}>
+                      <Grid size={{ xs: 12, sm: 4 }}>
                         <Box sx={{ textAlign: 'center' }}>
                           <Typography variant="subtitle2" sx={{ mb: 1, fontWeight: 600 }}>
                             Resource File
@@ -1040,12 +1040,12 @@ const PendingSubmissionsPanel = () => {
                   <Grid container spacing={2}>
                     {viewDialog.submission.category === 'Blog' && (
                       <>
-                        <Grid item xs={12} sm={6}>
+                        <Grid size={{ xs: 12, sm: 6 }}>
                           <Typography variant="body2">
                             <strong>Suggested Author:</strong> {viewDialog.submission.suggestedAuthor}
                           </Typography>
                         </Grid>
-                        <Grid item xs={12} sm={6}>
+                        <Grid size={{ xs: 12, sm: 6 }}>
                           <Typography variant="body2">
                             <strong>Estimated Read Time:</strong> {viewDialog.submission.estimatedReadTime}
                           </Typography>
@@ -1054,18 +1054,18 @@ const PendingSubmissionsPanel = () => {
                     )}
                     {viewDialog.submission.category === 'Video' && (
                       <>
-                        <Grid item xs={12}>
+                        <Grid size={12}>
                           <Typography variant="body2">
                             <strong>Video URL:</strong> {viewDialog.submission.videoUrl}
                           </Typography>
                         </Grid>
-                        <Grid item xs={12} sm={6}>
+                        <Grid size={{ xs: 12, sm: 6 }}>
                           <Typography variant="body2">
                             <strong>Duration:</strong> {viewDialog.submission.duration}
                           </Typography>
                         </Grid>
                         {viewDialog.submission.speakers && viewDialog.submission.speakers.length > 0 && (
-                          <Grid item xs={12}>
+                          <Grid size={12}>
                             <Typography variant="body2">
                               <strong>Speakers:</strong> {viewDialog.submission.speakers.join(', ')}
                             </Typography>
@@ -1075,18 +1075,18 @@ const PendingSubmissionsPanel = () => {
                     )}
                     {viewDialog.submission.category === 'Resources' && (
                       <>
-                        <Grid item xs={12} sm={6}>
+                        <Grid size={{ xs: 12, sm: 6 }}>
                           <Typography variant="body2">
                             <strong>Resource Type:</strong> {viewDialog.submission.resourceType}
                           </Typography>
                         </Grid>
-                        <Grid item xs={12} sm={6}>
+                        <Grid size={{ xs: 12, sm: 6 }}>
                           <Typography variant="body2">
                             <strong>Estimated Pages:</strong> {viewDialog.submission.estimatedPages}
                           </Typography>
                         </Grid>
                         {viewDialog.submission.resourceIncludes && viewDialog.submission.resourceIncludes.length > 0 && (
-                          <Grid item xs={12}>
+                          <Grid size={12}>
                             <Typography variant="body2">
                               <strong>Includes:</strong> {viewDialog.submission.resourceIncludes.join(', ')}
                             </Typography>
@@ -1126,29 +1126,29 @@ const PendingSubmissionsPanel = () => {
                 </AccordionSummary>
                 <AccordionDetails>
                   <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
                       <Typography variant="body2">
                         <strong>Name:</strong> {viewDialog.submission.submitterName}
                       </Typography>
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
                       <Typography variant="body2">
                         <strong>Email:</strong> {viewDialog.submission.submitterEmail}
                       </Typography>
                     </Grid>
                     {viewDialog.submission.submitterOrganization && (
-                      <Grid item xs={12} sm={6}>
+                      <Grid size={{ xs: 12, sm: 6 }}>
                         <Typography variant="body2">
                           <strong>Organization:</strong> {viewDialog.submission.submitterOrganization}
                         </Typography>
                       </Grid>
                     )}
-                    <Grid item xs={12} sm={6}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
                       <Typography variant="body2">
                         <strong>Target Audience:</strong> {viewDialog.submission.targetAudience}
                       </Typography>
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
                       <Typography variant="body2">
                         <strong>Priority:</strong> {viewDialog.submission.urgency}
                       </Typography>

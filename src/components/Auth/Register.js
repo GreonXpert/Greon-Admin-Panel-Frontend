@@ -341,7 +341,7 @@ const Register = () => {
                 {/* Step 0: Personal Information */}
                 {activeStep === 0 && (
                   <Grid container spacing={3}>
-                    <Grid item xs={12}>
+                    <Grid size={12}>
                       <TextField
                         fullWidth
                         name="name"
@@ -366,7 +366,7 @@ const Register = () => {
                         }}
                       />
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid size={12}>
                       <TextField
                         fullWidth
                         name="email"
@@ -398,7 +398,7 @@ const Register = () => {
                 {/* Step 1: Security Setup */}
                 {activeStep === 1 && (
                   <Grid container spacing={3}>
-                    <Grid item xs={12}>
+                    <Grid size={12}>
                       <TextField
                         fullWidth
                         name="password"
@@ -468,7 +468,7 @@ const Register = () => {
                       )}
                     </Grid>
 
-                    <Grid item xs={12}>
+                    <Grid size={12}>
                       <TextField
                         fullWidth
                         name="confirmPassword"

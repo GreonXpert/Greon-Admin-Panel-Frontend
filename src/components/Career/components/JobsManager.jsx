@@ -6,7 +6,8 @@ import {
   MenuItem, InputAdornment, Button, Card, CardContent, CardMedia,
   CardActionArea, CardActions, Chip, CircularProgress, TablePagination,
   Alert, Dialog, DialogTitle, DialogContent, DialogActions, IconButton,
-  Paper, List, ListItem, ListItemText, Stack, Divider
+  Paper, List, ListItem, ListItemText, Stack, Divider, RadioGroup, Radio,
+  FormControlLabel, FormGroup, Checkbox, OutlinedInput
 } from '@mui/material';
 import {
   Search as SearchIcon, Add as AddIcon, Edit as EditIcon,
@@ -29,6 +30,17 @@ const JOB_STATUS_CONFIG = {
 };
 
 const DEPARTMENTS = ['Engineering', 'Marketing', 'Sales', 'HR', 'Finance', 'Operations', 'Product', 'Design'];
+
+// Groups a job's custom questions by their section, in first-seen order
+const groupQuestionsBySection = (questions) => {
+  const map = new Map();
+  (questions || []).forEach(q => {
+    const section = q.section || 'General';
+    if (!map.has(section)) map.set(section, []);
+    map.get(section).push(q);
+  });
+  return Array.from(map.entries()).map(([section, sectionQuestions]) => ({ section, questions: sectionQuestions }));
+};
 
 const JobsManager = ({ jobs, totalJobs, loading, onRefresh, onCreateJob, onUpdateJob, onDeleteJob, toast }) => {
   const [filters, setFilters] = useState({
@@ -71,8 +83,15 @@ const JobsManager = ({ jobs, totalJobs, loading, onRefresh, onCreateJob, onUpdat
     if (minNum && maxNum) return `${currency} ${minNum.toLocaleString()} - ${maxNum.toLocaleString()}`;
     if (minNum) return `${currency} ${minNum.toLocaleString()}+`;
     if (maxNum) return `Up to ${currency} ${maxNum.toLocaleString()}`;
-    
+
     return 'Competitive';
+  };
+
+  // Format internship duration, e.g. "3 Months"
+  const formatInternshipDuration = (job) => {
+    if (job?.jobType !== 'Internship' || !job?.internshipDuration?.value) return null;
+    const { value, unit = 'Months' } = job.internshipDuration;
+    return `${value} ${unit}`;
   };
 
   const handleFilterChange = (field, value) => {
@@ -113,10 +132,13 @@ const JobsManager = ({ jobs, totalJobs, loading, onRefresh, onCreateJob, onUpdat
         featured: false
       };
       delete jobData._id;
+      delete jobData.__v;
+      delete jobData.slug;
       delete jobData.createdAt;
       delete jobData.updatedAt;
       delete jobData.applicationCount;
       delete jobData.viewCount;
+      delete jobData.analytics;
 
       await axios.post(`${API_URL}`, jobData, authHeader);
       toast('Job duplicated successfully', 'success');
@@ -160,7 +182,7 @@ const JobsManager = ({ jobs, totalJobs, loading, onRefresh, onCreateJob, onUpdat
       {/* Filters and Create Button */}
       <Box sx={{ mb: 3 }}>
         <Grid container spacing={2} alignItems="center">
-          <Grid item xs={12} md={3}>
+          <Grid size={{ xs: 12, md: 3 }}>
             <TextField
               fullWidth
               placeholder="Search jobs..."
@@ -176,7 +198,7 @@ const JobsManager = ({ jobs, totalJobs, loading, onRefresh, onCreateJob, onUpdat
               sx={{ bgcolor: 'white', borderRadius: 2 }}
             />
           </Grid>
-          <Grid item xs={12} md={2}>
+          <Grid size={{ xs: 12, md: 2 }}>
             <FormControl fullWidth>
               <InputLabel>Status</InputLabel>
               <Select
@@ -194,7 +216,7 @@ const JobsManager = ({ jobs, totalJobs, loading, onRefresh, onCreateJob, onUpdat
               </Select>
             </FormControl>
           </Grid>
-          <Grid item xs={12} md={2}>
+          <Grid size={{ xs: 12, md: 2 }}>
             <FormControl fullWidth>
               <InputLabel>Department</InputLabel>
               <Select
@@ -210,7 +232,7 @@ const JobsManager = ({ jobs, totalJobs, loading, onRefresh, onCreateJob, onUpdat
               </Select>
             </FormControl>
           </Grid>
-          <Grid item xs={12} md={2}>
+          <Grid size={{ xs: 12, md: 2 }}>
             <FormControl fullWidth>
               <InputLabel>Featured</InputLabel>
               <Select
@@ -225,7 +247,7 @@ const JobsManager = ({ jobs, totalJobs, loading, onRefresh, onCreateJob, onUpdat
               </Select>
             </FormControl>
           </Grid>
-          <Grid item xs={12} md={3}>
+          <Grid size={{ xs: 12, md: 3 }}>
             <Button
               variant="contained"
               startIcon={<AddIcon />}
@@ -287,7 +309,7 @@ const JobsManager = ({ jobs, totalJobs, loading, onRefresh, onCreateJob, onUpdat
       ) : (
         <Grid container spacing={3}>
           {jobs.map((job) => (
-            <Grid item xs={12} sm={6} md={4} key={job._id}>
+            <Grid size={{ xs: 12, sm: 6, md: 4 }} key={job._id}>
               <Card
                 sx={{
                   height: '100%',
@@ -368,6 +390,7 @@ const JobsManager = ({ jobs, totalJobs, loading, onRefresh, onCreateJob, onUpdat
                       <BusinessIcon sx={{ mr: 1, fontSize: 18, color: '#666' }} />
                       <Typography variant="body2" color="text.secondary">
                         {job.department} • {job.jobType}
+                        {formatInternshipDuration(job) ? ` (${formatInternshipDuration(job)})` : ''}
                       </Typography>
                     </Box>
 
@@ -498,7 +521,7 @@ const JobsManager = ({ jobs, totalJobs, loading, onRefresh, onCreateJob, onUpdat
         PaperProps={{ sx: { borderRadius: 3, maxHeight: '90vh' } }}
       >
         <DialogTitle sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Typography variant="h6">{selectedJob?.jobRole}</Typography>
+          <Typography variant="h6" component="span">{selectedJob?.jobRole}</Typography>
           <IconButton onClick={() => setViewDialog(false)} sx={{ color: '#1AC99F' }}>
             <CloseIcon />
           </IconButton>
@@ -537,33 +560,39 @@ const JobsManager = ({ jobs, totalJobs, loading, onRefresh, onCreateJob, onUpdat
 
               <Grid container spacing={3}>
                 {/* Job Details */}
-                <Grid item xs={12} md={6}>
+                <Grid size={{ xs: 12, md: 6 }}>
                   <Paper sx={{ p: 3, borderRadius: 2, bgcolor: '#f8f9fa' }}>
                     <Typography variant="h6" sx={{ mb: 2, color: '#1AC99F', fontWeight: 600 }}>
                       🎯 Job Details
                     </Typography>
                     <Grid container spacing={2}>
-                      <Grid item xs={12}>
+                      <Grid size={12}>
                         <Typography variant="subtitle2" color="text.secondary">Department</Typography>
                         <Typography variant="body1">{selectedJob.department}</Typography>
                       </Grid>
-                      <Grid item xs={12}>
+                      <Grid size={12}>
                         <Typography variant="subtitle2" color="text.secondary">Location</Typography>
                         <Typography variant="body1">{selectedJob.location}</Typography>
                       </Grid>
-                      <Grid item xs={12}>
+                      <Grid size={12}>
                         <Typography variant="subtitle2" color="text.secondary">Job Type</Typography>
                         <Typography variant="body1">{selectedJob.jobType}</Typography>
                       </Grid>
-                      <Grid item xs={12}>
+                      {formatInternshipDuration(selectedJob) && (
+                        <Grid size={12}>
+                          <Typography variant="subtitle2" color="text.secondary">Internship Duration</Typography>
+                          <Typography variant="body1">{formatInternshipDuration(selectedJob)}</Typography>
+                        </Grid>
+                      )}
+                      <Grid size={12}>
                         <Typography variant="subtitle2" color="text.secondary">Experience Required</Typography>
                         <Typography variant="body1">{selectedJob.experienceRequired}</Typography>
                       </Grid>
-                      <Grid item xs={12}>
+                      <Grid size={12}>
                         <Typography variant="subtitle2" color="text.secondary">Joining Time</Typography>
                         <Typography variant="body1">{selectedJob.joiningTime}</Typography>
                       </Grid>
-                      <Grid item xs={12}>
+                      <Grid size={12}>
                         <Typography variant="subtitle2" color="text.secondary">Salary Range</Typography>
                         <Typography variant="body1" sx={{ fontWeight: 600 }}>
                           {formatSalaryRange(selectedJob.salaryRange)}
@@ -574,29 +603,29 @@ const JobsManager = ({ jobs, totalJobs, loading, onRefresh, onCreateJob, onUpdat
                 </Grid>
 
                 {/* Metrics & Info */}
-                <Grid item xs={12} md={6}>
+                <Grid size={{ xs: 12, md: 6 }}>
                   <Paper sx={{ p: 3, borderRadius: 2, bgcolor: '#f8f9fa' }}>
                     <Typography variant="h6" sx={{ mb: 2, color: '#1AC99F', fontWeight: 600 }}>
                       📊 Performance Metrics
                     </Typography>
                     <Grid container spacing={2}>
-                      <Grid item xs={6}>
+                      <Grid size={6}>
                         <Typography variant="subtitle2" color="text.secondary">Applications</Typography>
                         <Typography variant="h4" sx={{ color: '#1AC99F', fontWeight: 700 }}>
                           {selectedJob.applicationCount || 0}
                         </Typography>
                       </Grid>
-                      <Grid item xs={6}>
+                      <Grid size={6}>
                         <Typography variant="subtitle2" color="text.secondary">Views</Typography>
                         <Typography variant="h4" sx={{ color: '#2196F3', fontWeight: 700 }}>
                           {selectedJob.viewCount || 0}
                         </Typography>
                       </Grid>
-                      <Grid item xs={12}>
+                      <Grid size={12}>
                         <Typography variant="subtitle2" color="text.secondary">Posted Date</Typography>
                         <Typography variant="body1">{formatDate(selectedJob.createdAt)}</Typography>
                       </Grid>
-                      <Grid item xs={12}>
+                      <Grid size={12}>
                         <Typography variant="subtitle2" color="text.secondary">Last Updated</Typography>
                         <Typography variant="body1">{formatDate(selectedJob.updatedAt)}</Typography>
                       </Grid>
@@ -605,7 +634,7 @@ const JobsManager = ({ jobs, totalJobs, loading, onRefresh, onCreateJob, onUpdat
                 </Grid>
 
                 {/* Description */}
-                <Grid item xs={12}>
+                <Grid size={12}>
                   <Paper sx={{ p: 3, borderRadius: 2, bgcolor: '#f8f9fa' }}>
                     <Typography variant="h6" sx={{ mb: 2, color: '#1AC99F', fontWeight: 600 }}>
                       📝 Job Description
@@ -622,7 +651,7 @@ const JobsManager = ({ jobs, totalJobs, loading, onRefresh, onCreateJob, onUpdat
 
                 {/* Responsibilities */}
                 {selectedJob.responsibilities && selectedJob.responsibilities.length > 0 && (
-                  <Grid item xs={12} md={6}>
+                  <Grid size={{ xs: 12, md: 6 }}>
                     <Paper sx={{ p: 3, borderRadius: 2, bgcolor: '#f8f9fa' }}>
                       <Typography variant="h6" sx={{ mb: 2, color: '#1AC99F', fontWeight: 600 }}>
                         📋 Key Responsibilities
@@ -647,7 +676,7 @@ const JobsManager = ({ jobs, totalJobs, loading, onRefresh, onCreateJob, onUpdat
 
                 {/* Requirements */}
                 {selectedJob.requirements && selectedJob.requirements.length > 0 && (
-                  <Grid item xs={12} md={6}>
+                  <Grid size={{ xs: 12, md: 6 }}>
                     <Paper sx={{ p: 3, borderRadius: 2, bgcolor: '#f8f9fa' }}>
                       <Typography variant="h6" sx={{ mb: 2, color: '#1AC99F', fontWeight: 600 }}>
                         ✅ Requirements
@@ -672,7 +701,7 @@ const JobsManager = ({ jobs, totalJobs, loading, onRefresh, onCreateJob, onUpdat
 
                 {/* Skills */}
                 {selectedJob.skills && selectedJob.skills.length > 0 && (
-                  <Grid item xs={12}>
+                  <Grid size={12}>
                     <Paper sx={{ p: 3, borderRadius: 2, bgcolor: '#f8f9fa' }}>
                       <Typography variant="h6" sx={{ mb: 2, color: '#1AC99F', fontWeight: 600 }}>
                         🛠️ Required Skills
@@ -694,7 +723,7 @@ const JobsManager = ({ jobs, totalJobs, loading, onRefresh, onCreateJob, onUpdat
 
                 {/* Benefits */}
                 {selectedJob.benefits && selectedJob.benefits.length > 0 && (
-                  <Grid item xs={12}>
+                  <Grid size={12}>
                     <Paper sx={{ p: 3, borderRadius: 2, bgcolor: '#f8f9fa' }}>
                       <Typography variant="h6" sx={{ mb: 2, color: '#1AC99F', fontWeight: 600 }}>
                         🎁 Benefits & Perks
@@ -708,6 +737,121 @@ const JobsManager = ({ jobs, totalJobs, loading, onRefresh, onCreateJob, onUpdat
                             size="small"
                             sx={{ fontSize: '0.8rem' }}
                           />
+                        ))}
+                      </Stack>
+                    </Paper>
+                  </Grid>
+                )}
+
+                {/* Application Questions - shown exactly as the applicant will see & answer them */}
+                {selectedJob.customQuestions && selectedJob.customQuestions.length > 0 && (
+                  <Grid size={12}>
+                    <Paper sx={{ p: 3, borderRadius: 2, bgcolor: '#f8f9fa' }}>
+                      <Typography variant="h6" sx={{ mb: 0.5, color: '#1AC99F', fontWeight: 600 }}>
+                        📝 Application Questions
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                        Preview — this is the form applicants will fill in when they apply.
+                      </Typography>
+                      <Stack spacing={4}>
+                        {groupQuestionsBySection(selectedJob.customQuestions).map(({ section, questions: sectionQuestions }) => (
+                          <Box key={section}>
+                            {groupQuestionsBySection(selectedJob.customQuestions).length > 1 && (
+                              <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 2, color: '#0E9A78' }}>
+                                {section}
+                              </Typography>
+                            )}
+                            <Stack spacing={3}>
+                              {sectionQuestions.map((q, index) => (
+                                <Box key={index}>
+                                  {q.questionType === 'text' && (
+                                    <TextField
+                                      label={q.questionText} required={q.required} fullWidth disabled
+                                      placeholder="Applicant's answer"
+                                    />
+                                  )}
+                                  {q.questionType === 'link' && (
+                                    <TextField
+                                      label={q.questionText} required={q.required} fullWidth disabled
+                                      placeholder="https://..."
+                                    />
+                                  )}
+                                  {q.questionType === 'textarea' && (
+                                    <TextField
+                                      label={q.questionText} required={q.required} fullWidth disabled
+                                      multiline rows={3} placeholder="Applicant's answer"
+                                    />
+                                  )}
+                                  {q.questionType === 'number' && (
+                                    <TextField
+                                      label={q.questionText} required={q.required} fullWidth disabled
+                                      type="number" placeholder="0"
+                                    />
+                                  )}
+                                  {q.questionType === 'yesno' && (
+                                    <Box>
+                                      <Typography variant="body2" sx={{ mb: 0.5 }}>
+                                        {q.questionText}{q.required && ' *'}
+                                      </Typography>
+                                      <RadioGroup row value="">
+                                        <FormControlLabel value="true" control={<Radio disabled />} label="Yes" />
+                                        <FormControlLabel value="false" control={<Radio disabled />} label="No" />
+                                      </RadioGroup>
+                                    </Box>
+                                  )}
+                                  {q.questionType === 'radio' && (
+                                    <Box>
+                                      <Typography variant="body2" sx={{ mb: 0.5 }}>
+                                        {q.questionText}{q.required && ' *'}
+                                      </Typography>
+                                      <RadioGroup value="">
+                                        {(q.options || []).map((opt, oi) => (
+                                          <FormControlLabel key={oi} value={opt} control={<Radio disabled />} label={opt} />
+                                        ))}
+                                      </RadioGroup>
+                                    </Box>
+                                  )}
+                                  {q.questionType === 'checkbox' && (
+                                    <Box>
+                                      <Typography variant="body2" sx={{ mb: 0.5 }}>
+                                        {q.questionText}{q.required && ' *'}
+                                      </Typography>
+                                      <FormGroup>
+                                        {(q.options || []).map((opt, oi) => (
+                                          <FormControlLabel key={oi} control={<Checkbox disabled />} label={opt} />
+                                        ))}
+                                      </FormGroup>
+                                    </Box>
+                                  )}
+                                  {q.questionType === 'dropdown' && (
+                                    <FormControl fullWidth disabled>
+                                      <InputLabel>{q.questionText}{q.required ? ' *' : ''}</InputLabel>
+                                      <Select value="" label={`${q.questionText}${q.required ? ' *' : ''}`}>
+                                        {(q.options || []).map((opt, oi) => (
+                                          <MenuItem key={oi} value={opt}>{opt}</MenuItem>
+                                        ))}
+                                      </Select>
+                                    </FormControl>
+                                  )}
+                                  {q.questionType === 'multiselect' && (
+                                    <FormControl fullWidth disabled>
+                                      <InputLabel>{q.questionText}{q.required ? ' *' : ''}</InputLabel>
+                                      <Select
+                                        multiple
+                                        value={[]}
+                                        input={<OutlinedInput label={`${q.questionText}${q.required ? ' *' : ''}`} />}
+                                        renderValue={() => ''}
+                                      >
+                                        {(q.options || []).map((opt, oi) => (
+                                          <MenuItem key={oi} value={opt}>{opt}</MenuItem>
+                                        ))}
+                                      </Select>
+                                    </FormControl>
+                                  )}
+                                </Box>
+                              ))}
+                            </Stack>
+                          </Box>
                         ))}
                       </Stack>
                     </Paper>

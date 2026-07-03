@@ -469,7 +469,7 @@ const ClimateIntelligencePanel = () => {
               const borderCol = hexToRgba(f.colorHex || '#1AC99F', 0.27);
 
               return (
-                <Grid item xs={12} sm={6} md={4} key={f._id}>
+                <Grid size={{ xs: 12, sm: 6, md: 4 }} key={f._id}>
                   <Card
                     sx={{
                       height: '100%',
@@ -758,7 +758,7 @@ const ClimateIntelligencePanel = () => {
         
         <DialogContent sx={{ pt: 3 }}>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 label="Title"
                 fullWidth
@@ -767,7 +767,7 @@ const ClimateIntelligencePanel = () => {
                 onChange={e => setForm(prev => ({ ...prev, title: e.target.value }))}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 select
                 label="Icon"
@@ -787,7 +787,7 @@ const ClimateIntelligencePanel = () => {
                 })}
               </TextField>
             </Grid>
-            <Grid item xs={12}>
+            <Grid size={12}>
               <TextField
                 label="Description"
                 fullWidth
@@ -798,7 +798,7 @@ const ClimateIntelligencePanel = () => {
                 onChange={e => setForm(prev => ({ ...prev, description: e.target.value }))}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 select
                 label="Shape"
@@ -812,7 +812,7 @@ const ClimateIntelligencePanel = () => {
                 ))}
               </TextField>
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <Box>
                 <Typography variant="subtitle2" sx={{ mb: 1, fontWeight: 600 }}>
                   Accent Color (colorHex)
@@ -840,7 +840,7 @@ const ClimateIntelligencePanel = () => {
             </Grid>
             
             {/* Benefits input */}
-            <Grid item xs={12}>
+            <Grid size={12}>
               <Typography variant="subtitle2" sx={{ mb: 1, fontWeight: 600 }}>
                 Benefits
               </Typography>
@@ -871,7 +871,7 @@ const ClimateIntelligencePanel = () => {
             </Grid>
 
             {/* Preview */}
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <Typography variant="subtitle2" sx={{ mb: 1, fontWeight: 600 }}>
                 Preview
               </Typography>
@@ -887,7 +887,7 @@ const ClimateIntelligencePanel = () => {
             </Grid>
 
             {/* Image */}
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <Typography variant="subtitle2" sx={{ mb: 1, fontWeight: 600 }}>
                 Image
               </Typography>

@@ -581,7 +581,7 @@ const ContactFormPanel = () => {
             {/* Analytics Cards */}
             {analytics && (
               <Grid container spacing={2} sx={{ mb: 3 }}>
-                <Grid item xs={6} sm={3}>
+                <Grid size={{ xs: 6, sm: 3 }}>
                   <Paper sx={{ p: 2, textAlign: 'center', bgcolor: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', borderRadius: 2 }}>
                     <Typography variant="h4" sx={{ fontWeight: 700, color: 'white' }}>
                       {analytics.overview?.totalForms || 0}
@@ -591,7 +591,7 @@ const ContactFormPanel = () => {
                     </Typography>
                   </Paper>
                 </Grid>
-                <Grid item xs={6} sm={3}>
+                <Grid size={{ xs: 6, sm: 3 }}>
                   <Paper sx={{ p: 2, textAlign: 'center', bgcolor: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', borderRadius: 2 }}>
                     <Typography variant="h4" sx={{ fontWeight: 700, color: 'white' }}>
                       {analytics.overview?.totalOpen || 0}
@@ -601,7 +601,7 @@ const ContactFormPanel = () => {
                     </Typography>
                   </Paper>
                 </Grid>
-                <Grid item xs={6} sm={3}>
+                <Grid size={{ xs: 6, sm: 3 }}>
                   <Paper sx={{ p: 2, textAlign: 'center', bgcolor: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', borderRadius: 2 }}>
                     <Typography variant="h4" sx={{ fontWeight: 700, color: 'white' }}>
                       {analytics.overview?.totalDeals || 0}
@@ -611,7 +611,7 @@ const ContactFormPanel = () => {
                     </Typography>
                   </Paper>
                 </Grid>
-                <Grid item xs={6} sm={3}>
+                <Grid size={{ xs: 6, sm: 3 }}>
                   <Paper sx={{ p: 2, textAlign: 'center', bgcolor: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', borderRadius: 2 }}>
                     <Typography variant="h4" sx={{ fontWeight: 700, color: 'white' }}>
                       {analytics.overview?.unreadForms || 0}
@@ -1073,27 +1073,27 @@ const ContactFormPanel = () => {
                 </AccordionSummary>
                 <AccordionDetails>
                   <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
                       <Typography variant="subtitle2" sx={{ fontWeight: 600, mb: 1 }}>Name</Typography>
                       <Typography variant="body1">{selectedForm.name}</Typography>
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
                       <Typography variant="subtitle2" sx={{ fontWeight: 600, mb: 1 }}>Email</Typography>
                       <Typography variant="body1">{selectedForm.email}</Typography>
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
                       <Typography variant="subtitle2" sx={{ fontWeight: 600, mb: 1 }}>Phone</Typography>
                       <Typography variant="body1">{selectedForm.phone || 'Not provided'}</Typography>
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
                       <Typography variant="subtitle2" sx={{ fontWeight: 600, mb: 1 }}>Company</Typography>
                       <Typography variant="body1">{selectedForm.company || 'Not provided'}</Typography>
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
                       <Typography variant="subtitle2" sx={{ fontWeight: 600, mb: 1 }}>Designation</Typography>
                       <Typography variant="body1">{selectedForm.designation || 'Not provided'}</Typography>
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
                       <Typography variant="subtitle2" sx={{ fontWeight: 600, mb: 1 }}>Submitted</Typography>
                       <Typography variant="body1">{formatDate(selectedForm.createdAt)}</Typography>
                     </Grid>
@@ -1198,7 +1198,7 @@ const ContactFormPanel = () => {
         
         <DialogContent sx={{ pt: 3 }}>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <FormControl fullWidth>
                 <InputLabel>Status</InputLabel>
                 <Select
@@ -1222,7 +1222,7 @@ const ContactFormPanel = () => {
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <FormControl fullWidth>
                 <InputLabel>Priority</InputLabel>
                 <Select
@@ -1241,7 +1241,7 @@ const ContactFormPanel = () => {
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item xs={12}>
+            <Grid size={12}>
               <TextField
                 fullWidth
                 multiline
@@ -1252,7 +1252,7 @@ const ContactFormPanel = () => {
                 placeholder="Reason for status change (optional)"
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 fullWidth
                 label="Estimated Value"
@@ -1264,7 +1264,7 @@ const ContactFormPanel = () => {
                 }}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid size={12}>
               <TextField
                 fullWidth
                 multiline
@@ -1275,7 +1275,7 @@ const ContactFormPanel = () => {
                 placeholder="Add internal notes..."
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid size={12}>
               <FormControlLabel
                 control={
                   <Switch
@@ -1391,7 +1391,7 @@ const ContactFormPanel = () => {
               <Typography variant="h6" sx={{ mb: 2 }}>🚀 Quick Templates</Typography>
               <Grid container spacing={2}>
                 {Object.entries(RESPONSE_TEMPLATES).map(([key, template]) => (
-                  <Grid item xs={12} sm={4} key={key}>
+                  <Grid size={{ xs: 12, sm: 4 }} key={key}>
                     <Button
                       variant="outlined"
                       onClick={() => applyTemplate(key)}
@@ -1539,7 +1539,7 @@ const ContactFormPanel = () => {
               {/* Overview Cards */}
               <Typography variant="h6" sx={{ mb: 2 }}>📈 Overview</Typography>
               <Grid container spacing={2} sx={{ mb: 4 }}>
-                <Grid item xs={6} sm={3}>
+                <Grid size={{ xs: 6, sm: 3 }}>
                   <Paper sx={{ p: 2, textAlign: 'center', borderRadius: 2 }}>
                     <Typography variant="h4" sx={{ color: '#1AC99F', fontWeight: 700 }}>
                       {analytics.overview?.totalForms || 0}
@@ -1549,7 +1549,7 @@ const ContactFormPanel = () => {
                     </Typography>
                   </Paper>
                 </Grid>
-                <Grid item xs={6} sm={3}>
+                <Grid size={{ xs: 6, sm: 3 }}>
                   <Paper sx={{ p: 2, textAlign: 'center', borderRadius: 2 }}>
                     <Typography variant="h4" sx={{ color: '#2196F3', fontWeight: 700 }}>
                       {analytics.overview?.totalOpen || 0}
@@ -1559,7 +1559,7 @@ const ContactFormPanel = () => {
                     </Typography>
                   </Paper>
                 </Grid>
-                <Grid item xs={6} sm={3}>
+                <Grid size={{ xs: 6, sm: 3 }}>
                   <Paper sx={{ p: 2, textAlign: 'center', borderRadius: 2 }}>
                     <Typography variant="h4" sx={{ color: '#4CAF50', fontWeight: 700 }}>
                       {analytics.overview?.totalDeals || 0}
@@ -1569,7 +1569,7 @@ const ContactFormPanel = () => {
                     </Typography>
                   </Paper>
                 </Grid>
-                <Grid item xs={6} sm={3}>
+                <Grid size={{ xs: 6, sm: 3 }}>
                   <Paper sx={{ p: 2, textAlign: 'center', borderRadius: 2 }}>
                     <Typography variant="h4" sx={{ color: '#FF9800', fontWeight: 700 }}>
                       {analytics.overview?.unreadForms || 0}
@@ -1585,7 +1585,7 @@ const ContactFormPanel = () => {
               <Typography variant="h6" sx={{ mb: 2 }}>📊 Status Distribution</Typography>
               <Grid container spacing={2} sx={{ mb: 4 }}>
                 {analytics.distributions?.status?.map((item) => (
-                  <Grid item xs={6} sm={4} md={2} key={item._id}>
+                  <Grid size={{ xs: 6, sm: 4, md: 2 }} key={item._id}>
                     <Paper sx={{ p: 2, textAlign: 'center', borderRadius: 2 }}>
                       <Typography variant="h5" sx={{ color: STATUS_CONFIG[item._id]?.color, fontWeight: 700 }}>
                         {item.count}
@@ -1602,7 +1602,7 @@ const ContactFormPanel = () => {
               <Typography variant="h6" sx={{ mb: 2 }}>🔥 Priority Distribution</Typography>
               <Grid container spacing={2}>
                 {analytics.distributions?.priority?.map((item) => (
-                  <Grid item xs={6} sm={3} key={item._id}>
+                  <Grid size={{ xs: 6, sm: 3 }} key={item._id}>
                     <Paper sx={{ p: 2, textAlign: 'center', borderRadius: 2 }}>
                       <Typography variant="h5" sx={{ color: PRIORITY_CONFIG[item._id]?.color, fontWeight: 700 }}>
                         {item.count}

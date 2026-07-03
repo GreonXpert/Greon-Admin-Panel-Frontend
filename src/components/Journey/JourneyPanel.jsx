@@ -839,7 +839,7 @@ const JourneyPanel = () => {
               const secondaryColor = milestone.secondaryColor || '#E8F8F4';
 
               return (
-                <Grid item xs={12} sm={6} md={4} key={milestone._id}>
+                <Grid size={{ xs: 12, sm: 6, md: 4 }} key={milestone._id}>
                   {/* ✅ FIXED: Even-sized Cards with Centered Content */}
                   <Card
                     sx={{
@@ -1177,7 +1177,7 @@ const JourneyPanel = () => {
             <AccordionDetails>
               {/* Row 1 — better proportional widths */}
               <Grid container spacing={2} sx={{ mb: 2 }}>
-                <Grid item xs={12} sm={4}>
+                <Grid size={{ xs: 12, sm: 4 }}>
                   <TextField
                     label="Year *"
                     value={form.year}
@@ -1187,7 +1187,7 @@ const JourneyPanel = () => {
                     sx={{ flex: 1 }}
                   />
                 </Grid>
-                <Grid item xs={12} sm={4}>
+                <Grid size={{ xs: 12, sm: 4 }}>
                   <FormControl fullWidth>
                     <InputLabel>Status</InputLabel>
                     <Select
@@ -1204,7 +1204,7 @@ const JourneyPanel = () => {
                     </Select>
                   </FormControl>
                 </Grid>
-                <Grid item xs={12} sm={4}>
+                <Grid size={{ xs: 12, sm: 4 }}>
                   <TextField
                     label="Display Order"
                     type="number"
@@ -1284,7 +1284,7 @@ const JourneyPanel = () => {
             </AccordionSummary>
             <AccordionDetails>
               <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
+                <Grid size={{ xs: 12, sm: 6 }}>
                   <FormControl fullWidth>
                     <InputLabel>Icon</InputLabel>
                     <Select
@@ -1305,7 +1305,7 @@ const JourneyPanel = () => {
                     </Select>
                   </FormControl>
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid size={{ xs: 12, sm: 6 }}>
                   <FormControl fullWidth>
                     <InputLabel>Side</InputLabel>
                     <Select
@@ -1322,7 +1322,7 @@ const JourneyPanel = () => {
                     </Select>
                   </FormControl>
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid size={{ xs: 12, sm: 6 }}>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                     <TextField
                       label="Primary Color"
@@ -1339,7 +1339,7 @@ const JourneyPanel = () => {
                     />
                   </Box>
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid size={{ xs: 12, sm: 6 }}>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                     <TextField
                       label="Secondary Color"
@@ -1410,7 +1410,7 @@ const JourneyPanel = () => {
                   </Typography>
                   <Grid container spacing={2}>
                     {form.existingImagePreviews.map((image, index) => (
-                      <Grid item xs={12} sm={6} md={3} key={index}>
+                      <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}>
                         <Box sx={{ position: 'relative', borderRadius: 2, overflow: 'hidden' }}>
                           <Box
                             component="img"
@@ -1474,7 +1474,7 @@ const JourneyPanel = () => {
                   </Typography>
                   <Grid container spacing={2}>
                     {form.imagePreviews.map((preview, index) => (
-                      <Grid item xs={12} sm={6} md={3} key={index}>
+                      <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}>
                         <Box sx={{ position: 'relative', borderRadius: 2, overflow: 'hidden' }}>
                           <Box
                             component="img"
@@ -1582,7 +1582,7 @@ const JourneyPanel = () => {
                   </Typography>
                   <Grid container spacing={1}>
                     {form.existingLogoPreviews.map((logo, index) => (
-                      <Grid item xs={6} sm={4} md={2} key={index}>
+                      <Grid size={{ xs: 6, sm: 4, md: 2 }} key={index}>
                         <Box sx={{ position: 'relative', borderRadius: 2, overflow: 'hidden' }}>
                           <Box
                             component="img"
@@ -1631,7 +1631,7 @@ const JourneyPanel = () => {
                   </Typography>
                   <Grid container spacing={1}>
                     {form.logoPreviews.map((preview, index) => (
-                      <Grid item xs={6} sm={4} md={2} key={index}>
+                      <Grid size={{ xs: 6, sm: 4, md: 2 }} key={index}>
                         <Box sx={{ position: 'relative', borderRadius: 2, overflow: 'hidden' }}>
                           <Box
                             component="img"
@@ -1902,7 +1902,7 @@ const JourneyPanel = () => {
               <Grid container spacing={3}>
                 {/* Achievements */}
                 {viewMilestone.achievements?.length > 0 && (
-                  <Grid item xs={12} md={6}>
+                  <Grid size={{ xs: 12, md: 6 }}>
                     <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
                       🏆 Achievements
                     </Typography>
@@ -1926,7 +1926,7 @@ const JourneyPanel = () => {
 
                 {/* Highlights */}
                 {viewMilestone.highlights?.length > 0 && (
-                  <Grid item xs={12} md={6}>
+                  <Grid size={{ xs: 12, md: 6 }}>
                     <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
                       ⭐ Key Highlights
                     </Typography>
@@ -1957,7 +1957,7 @@ const JourneyPanel = () => {
                   </Typography>
                   <Grid container spacing={2}>
                     {viewMilestone.logoImages.map((logo, index) => (
-                      <Grid item xs={6} sm={4} md={3} key={index}>
+                      <Grid size={{ xs: 6, sm: 4, md: 3 }} key={index}>
                         <Paper 
                           sx={{ 
                             p: 2, 
@@ -2029,19 +2029,19 @@ const JourneyPanel = () => {
               {/* Enhanced Metadata */}
               <Box sx={{ mt: 4, p: 3, bgcolor: '#f8f9fa', borderRadius: 2 }}>
                 <Grid container spacing={2}>
-                  <Grid item xs={6} sm={3}>
+                  <Grid size={{ xs: 6, sm: 3 }}>
                     <Typography variant="body2" sx={{ fontWeight: 600 }}>Side:</Typography>
                     <Typography variant="body2" sx={{ textTransform: 'capitalize' }}>{viewMilestone.side}</Typography>
                   </Grid>
-                  <Grid item xs={6} sm={3}>
+                  <Grid size={{ xs: 6, sm: 3 }}>
                     <Typography variant="body2" sx={{ fontWeight: 600 }}>Status:</Typography>
                     <Typography variant="body2" sx={{ textTransform: 'capitalize' }}>{viewMilestone.status}</Typography>
                   </Grid>
-                  <Grid item xs={6} sm={3}>
+                  <Grid size={{ xs: 6, sm: 3 }}>
                     <Typography variant="body2" sx={{ fontWeight: 600 }}>Order:</Typography>
                     <Typography variant="body2">{viewMilestone.displayOrder}</Typography>
                   </Grid>
-                  <Grid item xs={6} sm={3}>
+                  <Grid size={{ xs: 6, sm: 3 }}>
                     <Typography variant="body2" sx={{ fontWeight: 600 }}>Created:</Typography>
                     <Typography variant="body2">{new Date(viewMilestone.createdAt).toLocaleDateString()}</Typography>
                   </Grid>

@@ -285,7 +285,7 @@ const EmissionsPanel = () => {
             const total = emission.total || calculateTotal(emission.scope1, emission.scope2, emission.scope3);
             
             return (
-              <Grid item xs={12} sm={6} md={4} lg={3} key={emission._id}>
+              <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={emission._id}>
                 <Card 
                   sx={{ 
                     height: '100%',

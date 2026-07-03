@@ -1020,7 +1020,7 @@ const ExternalSubmission = () => {
             
             <Grid container spacing={3}>
               {submissionLink?.allowedCategories?.map((category) => (
-                <Grid item xs={12} md={4} key={category}>
+                <Grid size={{ xs: 12, md: 4 }} key={category}>
                   <CategoryOption
                     selected={formData.category === category}
                     onClick={() => handleInputChange('category', category)}
@@ -1052,7 +1052,7 @@ const ExternalSubmission = () => {
             </Typography>
             
             <Grid container spacing={3}>
-              <Grid item xs={12}>
+              <Grid size={12}>
                 <CleanTextField
                   label="Story Title *"
                   value={formData.title}
@@ -1062,7 +1062,7 @@ const ExternalSubmission = () => {
                 />
               </Grid>
               
-              <Grid item xs={12}>
+              <Grid size={12}>
                 <CleanTextField
                   label="Description *"
                   value={formData.description}
@@ -1074,7 +1074,7 @@ const ExternalSubmission = () => {
                 />
               </Grid>
               
-              <Grid item xs={12}>
+              <Grid size={12}>
                 <Typography variant="subtitle2" color="#2E8B8B" fontWeight={600} mb={2}>
                   Content * (Rich Text Editor)
                 </Typography>
@@ -1093,7 +1093,7 @@ const ExternalSubmission = () => {
               {/* Category-specific fields */}
               {formData.category === 'Blog' && (
                 <>
-                  <Grid item xs={12} md={6}>
+                  <Grid size={{ xs: 12, md: 6 }}>
                     <CleanTextField
                       label="Suggested Author"
                       value={formData.suggestedAuthor}
@@ -1101,7 +1101,7 @@ const ExternalSubmission = () => {
                       fullWidth
                     />
                   </Grid>
-                  <Grid item xs={12} md={6}>
+                  <Grid size={{ xs: 12, md: 6 }}>
                     <CleanTextField
                       label="Estimated Read Time"
                       value={formData.estimatedReadTime}
@@ -1115,7 +1115,7 @@ const ExternalSubmission = () => {
 
               {formData.category === 'Video' && (
                 <>
-                  <Grid item xs={12} md={6}>
+                  <Grid size={{ xs: 12, md: 6 }}>
                     <CleanTextField
                       label="Video URL *"
                       value={formData.videoUrl}
@@ -1124,7 +1124,7 @@ const ExternalSubmission = () => {
                       required
                     />
                   </Grid>
-                  <Grid item xs={12} md={6}>
+                  <Grid size={{ xs: 12, md: 6 }}>
                     <CleanTextField
                       label="Duration"
                       value={formData.duration}
@@ -1133,7 +1133,7 @@ const ExternalSubmission = () => {
                       fullWidth
                     />
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid size={12}>
                     <TagInput
                       label="Add Speakers"
                       value={formData.speakersInput}
@@ -1166,7 +1166,7 @@ const ExternalSubmission = () => {
 
               {formData.category === 'Resources' && (
                 <>
-                  <Grid item xs={12} md={6}>
+                  <Grid size={{ xs: 12, md: 6 }}>
                     <CleanTextField
                       select
                       label="Resource Type"
@@ -1180,7 +1180,7 @@ const ExternalSubmission = () => {
                       <MenuItem value="PowerPoint">PowerPoint Presentation</MenuItem>
                     </CleanTextField>
                   </Grid>
-                  <Grid item xs={12} md={6}>
+                  <Grid size={{ xs: 12, md: 6 }}>
                     <CleanTextField
                       type="number"
                       label="Estimated Pages"
@@ -1190,7 +1190,7 @@ const ExternalSubmission = () => {
                       inputProps={{ min: 1 }}
                     />
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid size={12}>
                     <TagInput
                       label="What's included in this resource?"
                       value={formData.includesInput}
@@ -1222,7 +1222,7 @@ const ExternalSubmission = () => {
               )}
 
               {/* Tags */}
-              <Grid item xs={12}>
+              <Grid size={12}>
                 <TagInput
                   label="Suggested Tags"
                   value={formData.tagsInput}
@@ -1263,13 +1263,13 @@ const ExternalSubmission = () => {
             
             <Grid container spacing={4}>
               {/* Submitter Information */}
-              <Grid item xs={12}>
+              <Grid size={12}>
                 <Typography variant="h6" color="#2E8B8B" fontWeight={600} mb={3}>
                   Your Information
                 </Typography>
               </Grid>
               
-              <Grid item xs={12} md={6}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <CleanTextField
                   label="Your Name *"
                   value={formData.submitterName}
@@ -1286,7 +1286,7 @@ const ExternalSubmission = () => {
                 />
               </Grid>
               
-              <Grid item xs={12} md={6}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <CleanTextField
                   label="Your Email *"
                   type="email"
@@ -1304,7 +1304,7 @@ const ExternalSubmission = () => {
                 />
               </Grid>
               
-              <Grid item xs={12}>
+              <Grid size={12}>
                 <CleanTextField
                   label="Organization (Optional)"
                   value={formData.submitterOrganization}
@@ -1321,14 +1321,14 @@ const ExternalSubmission = () => {
               </Grid>
 
               {/* Media Uploads */}
-              <Grid item xs={12}>
+              <Grid size={12}>
                 <Typography variant="h6" color="#2E8B8B" fontWeight={600} mb={3}>
                   Media & Files
                 </Typography>
               </Grid>
 
               {/* Main Image */}
-              <Grid item xs={12} md={6}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <Typography variant="subtitle2" color="#2E8B8B" fontWeight={600} mb={2}>
                   Main Image
                 </Typography>
@@ -1362,7 +1362,7 @@ const ExternalSubmission = () => {
 
               {/* Author Image (for Blog category) */}
               {formData.category === 'Blog' && (
-                <Grid item xs={12} md={6}>
+                <Grid size={{ xs: 12, md: 6 }}>
                   <Typography variant="subtitle2" color="#2E8B8B" fontWeight={600} mb={2}>
                     Author Image (Optional)
                   </Typography>
@@ -1397,7 +1397,7 @@ const ExternalSubmission = () => {
 
               {/* Resource File (for Resources category) */}
               {formData.category === 'Resources' && (
-                <Grid item xs={12}>
+                <Grid size={12}>
                   <Typography variant="subtitle2" color="#2E8B8B" fontWeight={600} mb={2}>
                     Resource File *
                   </Typography>
@@ -1440,7 +1440,7 @@ const ExternalSubmission = () => {
               )}
 
               {/* Additional Details */}
-              <Grid item xs={12} md={6}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <CleanTextField
                   label="Target Audience"
                   value={formData.targetAudience}
@@ -1450,7 +1450,7 @@ const ExternalSubmission = () => {
                 />
               </Grid>
               
-              <Grid item xs={12} md={6}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <CleanTextField
                   select
                   label="Priority Level"
